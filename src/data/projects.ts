@@ -26,13 +26,13 @@ export const projects: Project[] = [
         label: "Internal Brief",
         description: "Internal strategy and context brief",
         url: "",
-        downloadUrl: "",
+        downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Internal_Brief.docx",
       },
       externalBrief: {
         label: "External Brief",
         description: "Client-facing brief",
         url: "",
-        downloadUrl: "",
+        downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Philips_External.docx",
       },
       draftedHtml: {
         label: "Drafted HTML",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://phillips-oem-controlled-gateway.vercel.app",
         downloadUrl: "",
       },
     },
@@ -119,8 +119,8 @@ export const projects: Project[] = [
       draftedHtml: {
         label: "Drafted HTML",
         description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
+        url: "/assets/under-armour/envision_ua_presentation-3.html",
+        downloadUrl: "/assets/under-armour/envision_ua_presentation-3.html",
         feedbackEnabled: true,
       },
       publishedApplication: {

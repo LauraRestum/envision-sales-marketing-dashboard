@@ -27,7 +27,18 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
     };
   }, [handleKeyDown]);
 
-  const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+  const isHtml = /\.html?$/i.test(url);
+
+  // For Google Docs viewer, convert relative URLs to absolute (Google needs a full URL)
+  const absoluteUrl =
+    url.startsWith("/") && typeof window !== "undefined"
+      ? `${window.location.origin}${url}`
+      : url;
+
+  // Render HTML files directly; use Google Docs viewer for office documents
+  const viewerUrl = isHtml
+    ? url
+    : `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
 
   return (
     <div
