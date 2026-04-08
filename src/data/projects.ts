@@ -54,7 +54,7 @@ export const projects: Project[] = [
     projectName: "APS",
     description: "Presentation materials and working assets for the APS project.",
     owner: "Sales Team",
-    status: "Draft",
+    status: "Published",
     lastUpdated: "2026-04-08",
     assets: {
       sop: {
@@ -85,7 +85,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://aps-presentation.vercel.app",
         downloadUrl: "",
       },
     },
