@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envision — Partnership Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #003087;
+  --blue-dark: #001852;
+  --blue-mid: #004bb5;
+  --green: #78BE21;
+  --green-dim: rgba(120,190,33,0.15);
+  --text-light: #f0f4ff;
+  --text-muted: rgba(240,244,255,0.52);
+  --bg-body: #000d2e;
+  --surface-card: rgba(0,24,82,0.52);
+  --border-dark: rgba(255,255,255,0.08);
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: var(--bg-body);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* ============ DECK FRAMEWORK ============ */
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s ease, visibility 0s 0.55s;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 6rem 5rem;
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.55s ease;
+}
+
+/* ============ GLOBAL SLIDE PIECES ============ */
+.slide-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--green);
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.slide-eyebrow::before {
+  content: ''; display: block; width: 28px; height: 1px; background: var(--green);
+}
+.slide h1 {
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+.slide h1 em { font-style: normal; color: var(--green); }
+.slide h2 {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+.slide h2 em { font-style: normal; color: var(--green); }
+.slide-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 640px;
+}
+.slide-num {
+  position: absolute;
+  top: 2rem; right: 6rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.3);
+}
+.slide-footer {
+  position: absolute;
+  bottom: 2rem; left: 6rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.slide-footer span { color: var(--green); }
+
+/* ============ SLIDE 1: TITLE ============ */
+.slide-title {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(0,75,181,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(120,190,33,0.06) 0%, transparent 50%),
+    linear-gradient(135deg, #001030 0%, #001852 50%, #000818 100%);
+  justify-content: center;
+}
+.slide-title .grain {
+  position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.title-brand {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 3rem;
+}
+.title-brand span { color: var(--green); }
+.slide-title h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  max-width: 1100px;
+  margin-bottom: 2rem;
+}
+.title-meta {
+  display: flex; gap: 3rem; margin-top: 3rem;
+  padding-top: 2rem; border-top: 1px solid var(--border-dark);
+  max-width: 720px;
+}
+.title-meta-item .tm-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 0.4rem;
+}
+.title-meta-item .tm-val {
+  font-size: 0.85rem; color: rgba(255,255,255,0.75); font-weight: 500;
+}
+
+/* ============ SLIDE 2: AT A GLANCE ============ */
+.slide-stats { justify-content: center; }
+.slide-stats .stats-header { margin-bottom: 4rem; max-width: 800px; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border-dark);
+  background: rgba(255,255,255,0.04);
+  gap: 1px;
+}
+.stat-cell {
+  background: #000d2e;
+  padding: 2.75rem 2.5rem;
+  position: relative;
+}
+.stat-cell::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 2px; height: 32px; background: var(--green);
+}
+.stat-n {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.stat-n span { color: var(--green); }
+.stat-cell.text-stat .stat-n {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  letter-spacing: -0.01em;
+}
+.stat-l {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+/* ============ SLIDE 3: WHAT WE DO OVERVIEW ============ */
+.slide-overview { justify-content: center; }
+.overview-header { margin-bottom: 2.75rem; max-width: 900px; }
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-dark);
+}
+.ov-cell {
+  background: #000d2e;
+  padding: 1.75rem 1.85rem;
+  position: relative;
+  transition: background 0.2s;
+}
+.ov-cell:hover { background: #001235; }
+.ov-cell.ov-primary {
+  background: linear-gradient(140deg, #001852 0%, #002878 100%);
+  border-left: 2px solid var(--green);
+}
+.ov-cell.ov-primary:hover { background: linear-gradient(140deg, #001a5a 0%, #002d82 100%); }
+.ov-num {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--green);
+  margin-bottom: 0.75rem;
+}
+.ov-cell h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+}
+.ov-cell p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ============ SLIDE 3 & 4: CAPABILITIES ============ */
+.slide-cap { justify-content: center; }
+.slide-cap .cap-header { margin-bottom: 3.5rem; max-width: 850px; }
+
+/* Slide 4: header with image next to headline */
+.cap-header-with-img {
+  max-width: none !important;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3rem !important;
+}
+.cap-header-text {
+  max-width: 720px;
+}
+.cap-header-img {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+  border: 1px solid var(--border-dark);
+  border-left: 2px solid var(--green);
+  background: #000818;
+}
+.cap-header-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  filter: saturate(0.75) contrast(1.05);
+}
+.cap-header-img-fade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,13,46,0.92) 0%, rgba(0,13,46,0.35) 25%, rgba(0,13,46,0.15) 60%, rgba(0,13,46,0.5) 100%),
+    linear-gradient(180deg, rgba(0,13,46,0.4) 0%, transparent 30%, transparent 70%, rgba(0,13,46,0.45) 100%);
+  pointer-events: none;
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-dark);
+}
+.cap-card {
+  background: #000d2e;
+  padding: 2.5rem;
+}
+.cap-card.featured {
+  background: linear-gradient(140deg, #001852 0%, #002878 100%);
+  border-left: 2px solid var(--green);
+}
+.cap-tag {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 1.25rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.cap-tag::before { content: ''; display: block; width: 16px; height: 1px; background: var(--green); }
+.cap-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.cap-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============ SLIDE 5: PROOF POINT ============ */
+.slide-proof {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 75% 50%, rgba(0,48,135,0.35) 0%, transparent 55%),
+    #000818;
+}
+.proof-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1400px;
+}
+.proof-left h2 { margin-bottom: 1.5rem; }
+.proof-left p {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  max-width: 460px;
+}
+.proof-card {
+  background: linear-gradient(140deg, #001030 0%, #001852 100%);
+  border: 1px solid var(--border-dark);
+  border-left: 2px solid var(--green);
+  padding: 3rem;
+}
+.pc-tag {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 1.25rem;
+}
+.proof-card h3 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.proof-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.pc-meta {
+  display: flex; gap: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-dark);
+}
+.pc-meta-item .pcm-n {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 0.35rem;
+}
+.pc-meta-item .pcm-l {
+  font-size: 0.82rem; color: rgba(255,255,255,0.72);
+}
+
+/* ============ SLIDE 6: PULL QUOTE ============ */
+.slide-quote {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(0,48,135,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(120,190,33,0.05) 0%, transparent 50%),
+    #000612;
+}
+.quote-layout { max-width: 1100px; }
+blockquote {
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #fff;
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -2.5rem; left: -2.5rem;
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--green);
+  opacity: 0.35;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+blockquote span { color: var(--green); }
+cite {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  display: block;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--green);
+}
+
+/* ============ SLIDE 7: OPPORTUNITY INTRO ============ */
+.slide-opportunity {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(0,75,181,0.3) 0%, transparent 60%),
+    linear-gradient(180deg, #000818 0%, #001030 100%);
+  text-align: center;
+  align-items: center;
+}
+.opp-content { max-width: 1000px; }
+.slide-opportunity .slide-eyebrow { justify-content: center; }
+.slide-opportunity h1 {
+  margin: 0 auto 2rem;
+}
+.slide-opportunity .slide-sub {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 1.15rem;
+}
+
+/* ============ SLIDE 8: PARTNERSHIP PILLARS ============ */
+.slide-pillars { justify-content: center; }
+.pillars-header { margin-bottom: 3.5rem; max-width: 800px; }
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-dark);
+}
+.pillar {
+  background: #000d2e;
+  padding: 3rem 2.5rem;
+  position: relative;
+}
+.pillar-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--green);
+  margin-bottom: 1.5rem;
+}
+.pillar h4 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.pillar p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* ============ SLIDE 9: WHY ENVISION CLOSE ============ */
+.slide-close {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(0,48,135,0.3) 0%, transparent 55%),
+    #000612;
+}
+.close-header { margin-bottom: 3.5rem; max-width: 850px; }
+.close-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.close-pillar {
+  padding-top: 2rem;
+  border-top: 2px solid var(--green);
+}
+.cp-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+.close-pillar h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.close-pillar p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}
+.cp-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(120,190,33,0.35);
+  border-radius: 2px;
+}
+
+/* ============ SLIDE 10: CONTACT ============ */
+.slide-contact {
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(0,75,181,0.35) 0%, transparent 55%),
+    linear-gradient(135deg, #000818 0%, #001030 100%);
+}
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1400px;
+}
+.contact-left h1 {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  margin-bottom: 2rem;
+}
+.contact-left .address {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dark);
+  max-width: 380px;
+}
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-dark);
+}
+.contact-card {
+  background: #000d2e;
+  padding: 1.75rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+}
+.contact-card:first-child { border-left: 2px solid var(--green); background: linear-gradient(140deg, #001030 0%, #001852 100%); }
+.cc-role {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.4rem;
+}
+.cc-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.005em;
+}
+.cc-title {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.cc-detail {
+  text-align: right;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+}
+.cc-detail a { color: rgba(255,255,255,0.72); text-decoration: none; transition: color 0.2s; }
+.cc-detail a:hover { color: var(--green); }
+
+/* ============ NAV CONTROLS ============ */
+.deck-nav {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(0,13,46,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-dark);
+  padding: 0.65rem 1rem;
+  border-radius: 2px;
+}
+.deck-nav button {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  width: 32px; height: 32px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-family: inherit;
+  transition: color 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.deck-nav button:hover { color: var(--green); }
+.deck-nav .progress {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.55);
+  min-width: 50px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.deck-nav .progress span { color: var(--green); }
+
+.nav-hint {
+  position: fixed;
+  bottom: 2rem; left: 2rem;
+  z-index: 100;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  background: rgba(0,13,46,0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.75rem 1.1rem;
+  border: 1px solid var(--border-dark);
+  border-radius: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-dark);
+  border-radius: 2px;
+  font-size: 0.55rem;
+  font-family: inherit;
+  color: var(--green);
+  margin: 0 0.15rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1100px) {
+  .slide { padding: 4rem 3rem; }
+  .slide-num { right: 3rem; }
+  .slide-footer { left: 3rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .cap-grid { grid-template-columns: 1fr; }
+  .cap-header-with-img { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cap-header-img { height: 160px; }
+  .proof-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .close-pillars { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media (max-width: 700px) {
+  .slide { padding: 3.5rem 1.5rem; overflow-y: auto; }
+  .slide-num { right: 1.5rem; top: 1.25rem; }
+  .slide-footer { left: 1.5rem; bottom: 1.25rem; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .nav-hint { display: none; }
+  .deck-nav { bottom: 1rem; right: 1rem; }
+  blockquote::before { top: -1.5rem; left: -0.75rem; font-size: 5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ============ SLIDE 1: TITLE ============ -->
+  <section class="slide slide-title active" data-slide="1">
+    <div class="grain"></div>
+    <div class="title-brand">ENVI<span>S</span>ION</div>
+    <h1>American-Made Textiles.<br>Built for the Mission.<br><em>Engineered for What's Next.</em></h1>
+    <p class="slide-sub">A partnership conversation with Envision — textile manufacturing, innovation, and defense-ready production capacity.</p>
+
+    <div class="title-meta">
+      <div class="title-meta-item">
+        <div class="tm-label">Prepared By</div>
+        <div class="tm-val">Sebastian Zahr · Chief Revenue &amp; Strategy Officer</div>
+      </div>
+      <div class="title-meta-item">
+        <div class="tm-label">Facilities</div>
+        <div class="tm-val">Dallas, TX &middot; Wichita, KS</div>
+      </div>
+    </div>
+
+    <div class="slide-footer">CONFIDENTIAL &mdash; NOT FOR DISTRIBUTION</div>
+  </section>
+
+  <!-- ============ SLIDE 2: AT A GLANCE ============ -->
+  <section class="slide slide-stats" data-slide="2">
+    <div class="slide-num">02 / 10</div>
+    <div class="stats-header">
+      <div class="slide-eyebrow">Envision at a Glance</div>
+      <h2>Built at Scale.<br><em>Proven Over Decades.</em></h2>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-n">90<span>+</span></div>
+        <div class="stat-l">Years Manufacturing</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">410<span>K</span></div>
+        <div class="stat-l">Sq Ft · Dallas &amp; Wichita Facilities</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">447</div>
+        <div class="stat-l">Employees</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">$40<span>M</span></div>
+        <div class="stat-l">Facility Investment</div>
+      </div>
+      <div class="stat-cell text-stat">
+        <div class="stat-n">Berry<span> &amp;</span> TAA</div>
+        <div class="stat-l">Compliant Supply Chain</div>
+      </div>
+      <div class="stat-cell text-stat">
+        <div class="stat-n">DCMA</div>
+        <div class="stat-l">Alternate Release Authorized</div>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; CAPABILITIES OVERVIEW</div>
+  </section>
+
+  <!-- ============ SLIDE 3: WHAT WE DO OVERVIEW ============ -->
+  <section class="slide slide-overview" data-slide="3">
+    <div class="slide-num">03 / 10</div>
+    <div class="overview-header">
+      <div class="slide-eyebrow">What We Do</div>
+      <h2>A Vertically Integrated<br><em>American Manufacturer.</em></h2>
+    </div>
+
+    <div class="overview-grid">
+      <div class="ov-cell ov-primary">
+        <div class="ov-num">01</div>
+        <h4>Textile Manufacturing</h4>
+        <p>Safety apparel, tactical gear, FR/AR clothing, uniforms</p>
+      </div>
+      <div class="ov-cell ov-primary">
+        <div class="ov-num">02</div>
+        <h4>Innovation &amp; Prototyping</h4>
+        <p>R&amp;D lab, smart textiles, additive, digital patterns</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">03</div>
+        <h4>Kitting, Assembly &amp; Packaging</h4>
+        <p>Custom kits, subscription boxes, retail-ready</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">04</div>
+        <h4>Fulfillment &amp; Warehouse (WMS)</h4>
+        <p>Pick-n-pack, climate-controlled, e-commerce</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">05</div>
+        <h4>Contact Center</h4>
+        <p>Inbound / outbound, customer support, lead gen</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">06</div>
+        <h4>Mailroom &amp; Storeroom BPO</h4>
+        <p>Digitization, OCR, inventory, document management</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">07</div>
+        <h4>Award Binders &amp; Office Products</h4>
+        <p>Vinyl, casebound, markers, eyeglass cases</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">08</div>
+        <h4>Base Supply Centers</h4>
+        <p>16 locations · 14 states · CONUS installations</p>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-num">09</div>
+        <h4>Design &amp; Digital Asset Mgmt</h4>
+        <p>Brand, print, bindery, sourcing</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; CAPABILITIES &amp; SERVICES</div>
+  </section>
+
+  <!-- ============ SLIDE 4: IN FOCUS 01 — TEXTILE MANUFACTURING ============ -->
+  <section class="slide slide-cap" data-slide="4">
+    <div class="slide-num">04 / 10</div>
+    <div class="cap-header cap-header-with-img">
+      <div class="cap-header-text">
+        <div class="slide-eyebrow">In Focus &middot; 01</div>
+        <h2>Production-Scale Textile Manufacturing,<br><em>Under One Roof.</em></h2>
+      </div>
+      <div class="cap-header-img">
+        <img src="assets/textile-cutting.jpg" alt="Envision textile cutting operation" loading="lazy"
+             onerror="this.parentElement.style.background='linear-gradient(135deg,#001852,#003087)'">
+        <div class="cap-header-img-fade"></div>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card featured">
+        <div class="cap-tag">Cut. Sew. Finish.</div>
+        <h3>End-to-End Production</h3>
+        <p>Automated and specialty cutting, full garment assembly, hardware integration, and finishing — all in a single integrated facility. Built for volume. Engineered for precision.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Compliance</div>
+        <h3>Berry &amp; TAA Compliant. Made in the USA.</h3>
+        <p>Every garment, every component, every raw material cleared for government and federal supply chain standards. Not bolted on — the default.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Technical Fabrics</div>
+        <h3>FR / AR &amp; Safety Apparel</h3>
+        <p>Fire-retardant, arc-resistant, and high-visibility garments. Technical fabric and composite material expertise across tactical and safety applications.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Scale</div>
+        <h3>Production Capacity, Ready Now</h3>
+        <p>Full quality control checkpoints. Small batch to production scale. DCMA alternate release — cleared to ship without prior inspection.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; TEXTILE MANUFACTURING</div>
+  </section>
+
+  <!-- ============ SLIDE 5: IN FOCUS 02 — INNOVATION LAB ============ -->
+  <section class="slide slide-cap" data-slide="5">
+    <div class="slide-num">05 / 10</div>
+    <div class="cap-header">
+      <div class="slide-eyebrow">In Focus &middot; 02</div>
+      <h2>Not Just a Manufacturer.<br>A <em>Funded Innovation Partner.</em></h2>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card featured">
+        <div class="cap-tag">Rapid Prototyping</div>
+        <h3>Concept to Soldier System, In-House</h3>
+        <p>A dedicated innovation and prototyping laboratory integrated directly with production. Rapid prototyping, spec validation, and technology transition — concept to soldier system without vendor chains or lost context.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Smart Materials &middot; E-Textiles</div>
+        <h3>Sensor Fusion &amp; Wearable Tech</h3>
+        <p>Embedded sensors, RFID integration, and e-textile prototyping in functional garment form. Built for the next generation of wearable technology and human performance systems.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Advanced Materials</div>
+        <h3>Performance &amp; Technical Textiles</h3>
+        <p>Digital pattern design and additive manufacturing integrated with textile workflows. Engineered for advanced materials where every yard of high-performance fabric matters.</p>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-tag">Research Partners</div>
+        <h3>NIAR · Wichita State · SMU</h3>
+        <p>Active research partnerships across advanced materials, wearables, and human performance — extending lab capability well beyond its four walls.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; INNOVATION &amp; PROTOTYPING</div>
+  </section>
+
+  <!-- ============ SLIDE 6: DEVCOM PROOF POINT ============ -->
+  <section class="slide slide-proof" data-slide="6">
+    <div class="slide-num">06 / 10</div>
+
+    <div class="proof-layout">
+      <div class="proof-left">
+        <div class="slide-eyebrow">Already In Motion</div>
+        <h2>What's Resonating<br>With <em>DEVCOM.</em></h2>
+        <p>We're already inside the defense innovation ecosystem. The work is moving, the relationships are active, and the credibility is real.</p>
+        <p>That's the kind of foothold that takes years to build — and the kind of foothold that opens doors for the partners we bring with us.</p>
+      </div>
+
+      <div class="proof-card">
+        <div class="pc-tag">Proof Point</div>
+        <h3>Soldier Cold Weather System</h3>
+        <p>Partnered with a senior DOD innovation command to design, prototype, and assemble a cold weather system for soldier use. Translated the government specification into a production-ready prototype inside our on-site innovation lab — spec to prototype in a single integrated workflow.</p>
+        <div class="pc-meta">
+          <div class="pc-meta-item">
+            <div class="pcm-n">End-to-End</div>
+            <div class="pcm-l">Spec to prototype, in-house</div>
+          </div>
+          <div class="pc-meta-item">
+            <div class="pcm-n">Flexible</div>
+            <div class="pcm-l">Small-batch trials supported</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; DOD PROOF POINT</div>
+  </section>
+
+  <!-- ============ SLIDE 7: OPPORTUNITY INTRO ============ -->
+  <section class="slide slide-opportunity" data-slide="7">
+    <div class="slide-num">07 / 10</div>
+
+    <div class="opp-content">
+      <div class="slide-eyebrow">The Opportunity</div>
+      <h1>What We Envision<br>This Partnership<br><em>Looking Like.</em></h1>
+      <p class="slide-sub">A structured collaboration pairing world-class material science and product design with a fully compliant, production-scale American manufacturing partner — one already operating inside the defense innovation ecosystem.</p>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; THE OPPORTUNITY</div>
+  </section>
+
+  <!-- ============ SLIDE 8: PARTNERSHIP PILLARS ============ -->
+  <section class="slide slide-pillars" data-slide="8">
+    <div class="slide-num">08 / 10</div>
+
+    <div class="pillars-header">
+      <div class="slide-eyebrow">Three Pillars</div>
+      <h2>What the Partnership <em>Unlocks.</em></h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h4>Co-Developed Innovation</h4>
+        <p>Joint development of next-generation wearable and protective systems — advanced materials meeting a lab built for rapid prototyping, spec validation, and manufacturability from day one.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h4>Integrated Path to Production</h4>
+        <p>A single partner covering material evaluation, prototype, pilot, and production-scale manufacturing. No handoffs. No qualification gaps. No rebuilding supply chains from scratch.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h4>Access to the Ecosystem</h4>
+        <p>A path into federal and defense programs through an already-trusted, fully compliant partner — removing the barrier that stands between commercial innovation and government adoption.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; PARTNERSHIP VISION</div>
+  </section>
+
+  <!-- ============ SLIDE 9: WHY ENVISION CLOSE ============ -->
+  <section class="slide slide-close" data-slide="9">
+    <div class="slide-num">09 / 10</div>
+
+    <div class="close-header">
+      <div class="slide-eyebrow">Why Envision</div>
+      <h2>The Path Exists.<br><em>We're Already On It.</em></h2>
+    </div>
+
+    <div class="close-pillars">
+      <div class="close-pillar">
+        <div class="cp-num">01</div>
+        <h3>Compliance Infrastructure</h3>
+        <p>Berry. TAA. ISO 9001:2015. DCMA Alternate Release. 90+ years inside the federal supply chain.</p>
+        <p>The operational foundation every serious DOD program requires — and something that cannot be built quickly.</p>
+      </div>
+
+      <div class="close-pillar">
+        <div class="cp-num">02</div>
+        <h3>Lab &amp; Factory, Same Roof</h3>
+        <p>A full innovation lab integrated directly with production-scale manufacturing. Concept to prototype to production with no vendor chains and no lost context.</p>
+        <div class="cp-tag">Scalable capacity available now</div>
+      </div>
+
+      <div class="close-pillar">
+        <div class="cp-num">03</div>
+        <h3>Credibility Inside the Ecosystem</h3>
+        <p>Active working relationships with DEVCOM and the broader defense innovation community.</p>
+        <p>Going in alone means years of relationship building. Partnering with us means starting from the inside.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">ENVI<span>S</span>ION &middot; WHY ENVISION</div>
+  </section>
+
+  <!-- ============ SLIDE 10: CONTACT ============ -->
+  <section class="slide slide-contact" data-slide="10">
+    <div class="slide-num">10 / 10</div>
+
+    <div class="contact-layout">
+      <div class="contact-left">
+        <div class="slide-eyebrow">Let's Build</div>
+        <h1>Something<br><em>Together.</em></h1>
+        <div class="address">
+          1801 Valley View Lane<br>
+          Farmers Branch, TX 75234<br>
+          EnvisionUS.com &middot; (214) 821-2375
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="contact-card">
+          <div>
+            <div class="cc-role">Revenue &amp; Strategy</div>
+            <div class="cc-name">Sebastian Zahr</div>
+            <div class="cc-title">Chief Revenue &amp; Strategy Officer</div>
+          </div>
+          <div class="cc-detail">
+            <a href="mailto:Sebastian.Zahr@EnvisionUS.com">Sebastian.Zahr@EnvisionUS.com</a><br>
+            (316) 655-4243
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div>
+            <div class="cc-role">Operations</div>
+            <div class="cc-name">Patrick Tuttle</div>
+            <div class="cc-title">SVP Operations &amp; New Product Development</div>
+          </div>
+          <div class="cc-detail">
+            <a href="mailto:Patrick.Tuttle@EnvisionUS.com">Patrick.Tuttle@EnvisionUS.com</a><br>
+            (316) 253-1468
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div>
+            <div class="cc-role">Innovation Lab</div>
+            <div class="cc-name">Steve Amigh</div>
+            <div class="cc-title">Manager, Innovation &amp; Prototyping</div>
+          </div>
+          <div class="cc-detail">
+            <a href="mailto:Steven.Amigh@EnvisionUS.com">Steven.Amigh@EnvisionUS.com</a><br>
+            (469) 438-7744
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">CONFIDENTIAL &mdash; NOT FOR DISTRIBUTION WITHOUT WRITTEN PERMISSION</div>
+  </section>
+
+</div>
+
+<!-- ============ NAV ============ -->
+<div class="nav-hint">
+  Use <kbd>←</kbd> <kbd>→</kbd> to navigate
+</div>
+
+<div class="deck-nav">
+  <button id="prev" aria-label="Previous slide">◄</button>
+  <div class="progress"><span id="current">01</span> / <span id="total">10</span></div>
+  <button id="next" aria-label="Next slide">►</button>
+</div>
+
+<script>
+(function() {
+  var slides = document.querySelectorAll('.slide');
+  var total = slides.length;
+  var currentIdx = 0;
+
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var currentLabel = document.getElementById('current');
+  var totalLabel = document.getElementById('total');
+
+  totalLabel.textContent = String(total).padStart(2, '0');
+
+  function showSlide(idx) {
+    if (idx < 0) idx = 0;
+    if (idx >= total) idx = total - 1;
+    slides[currentIdx].classList.remove('active');
+    slides[idx].classList.add('active');
+    currentIdx = idx;
+    currentLabel.textContent = String(idx + 1).padStart(2, '0');
+  }
+
+  function next() { showSlide(currentIdx + 1); }
+  function prev() { showSlide(currentIdx - 1); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prev();
+    } else if (e.key === 'Home') {
+      showSlide(0);
+    } else if (e.key === 'End') {
+      showSlide(total - 1);
+    }
+  });
+
+  // Click anywhere on slide to advance (except on links/buttons)
+  document.querySelector('.deck').addEventListener('click', function(e) {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    next();
+  });
+})();
+</script>
+
+</body>
+</html>
