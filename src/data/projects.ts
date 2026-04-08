@@ -126,7 +126,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "https://vercel.com/laurarestums-projects/under-armour-textiles",
+        url: "https://under-armour-textiles.vercel.app",
         downloadUrl: "",
       },
     },
