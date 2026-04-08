@@ -15,6 +15,8 @@ export const projects: Project[] = [
     owner: "Sales Team",
     status: "Draft",
     lastUpdated: "2026-04-08",
+    assignee: "Dedra",
+    statusNote: "Live preview has updates",
     assets: {
       sop: {
         label: "SOP",
@@ -56,6 +58,8 @@ export const projects: Project[] = [
     owner: "Sales Team",
     status: "Published",
     lastUpdated: "2026-04-08",
+    assignee: "Rob",
+    statusNote: "Has updates",
     assets: {
       sop: {
         label: "SOP",
@@ -95,8 +99,9 @@ export const projects: Project[] = [
     projectName: "Under Armour",
     description: "Presentation materials and working assets for the Under Armour project.",
     owner: "Sales Team",
-    status: "Draft",
-    lastUpdated: "2026-04-08",
+    status: "Ready",
+    lastUpdated: "2026-04-09",
+    assignee: "Sebastian",
     assets: {
       sop: {
         label: "SOP",

@@ -11,11 +11,19 @@ const variants: Record<ProjectStatus, string> = {
     "bg-blue-50 text-blue-700",
 };
 
+const dotColors: Record<ProjectStatus, string> = {
+  Draft: "bg-slate-400",
+  "In Progress": "bg-amber-500",
+  Ready: "bg-emerald-500",
+  Published: "bg-blue-500",
+};
+
 export function StatusBadge({ status }: { status: ProjectStatus }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide ${variants[status]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide ${variants[status]}`}
     >
+      <span className={`inline-block h-2 w-2 rounded-full ${dotColors[status]}`} />
       {status}
     </span>
   );
