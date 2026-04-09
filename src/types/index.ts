@@ -27,4 +27,6 @@ export interface Project {
   status: ProjectStatus;
   lastUpdated: string;
   assets: ProjectAssets;
+  assignee?: string;
+  statusNote?: string;
 }

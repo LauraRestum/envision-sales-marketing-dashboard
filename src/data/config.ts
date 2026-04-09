@@ -6,7 +6,7 @@
  */
 export const appConfig = {
   /** Recipient address for drafted-HTML feedback emails. */
-  feedbackEmail: "feedback@envision.com",
+  feedbackEmail: "Laura.restum@envisionus.com",
 
   /** Dashboard display title. */
   title: "Sales Asset Hub",

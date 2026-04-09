@@ -79,12 +79,20 @@ export function ProjectCard({ project }: { project: Project }) {
         aria-expanded={open}
       >
         <div className="flex-1 min-w-0">
-          {/* Row 1: name + status */}
+          {/* Row 1: name + status + assignee */}
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-base font-bold text-[var(--color-text)] truncate">
               {project.projectName}
             </h2>
             <StatusBadge status={project.status} />
+            {project.assignee && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-semibold text-violet-700 border border-violet-200">
+                <svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+                {project.assignee}
+              </span>
+            )}
           </div>
 
           {/* Row 2: description */}
@@ -92,6 +100,14 @@ export function ProjectCard({ project }: { project: Project }) {
             <p className="mt-1 text-sm text-[var(--color-text-secondary)] line-clamp-1">
               {project.description}
             </p>
+          )}
+
+          {/* Status note (e.g. "Has updates") */}
+          {project.statusNote && (
+            <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+              <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              {project.statusNote}
+            </div>
           )}
 
           {/* Row 3: meta */}
