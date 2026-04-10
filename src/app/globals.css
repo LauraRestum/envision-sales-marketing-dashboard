@@ -83,6 +83,17 @@ body {
   background: var(--color-border-hover);
 }
 
+/* ─── Blue glow animation ───────────────────────────────────── */
+
+@keyframes glow-blue {
+  0%, 100% { box-shadow: 0 0 4px 1px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.85); }
+}
+
+.animate-glow-blue {
+  animation: glow-blue 1.5s ease-in-out infinite;
+}
+
 /* ─── Reduced motion ────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

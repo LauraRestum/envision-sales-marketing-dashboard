@@ -29,4 +29,5 @@ export interface Project {
   assets: ProjectAssets;
   assignee?: string;
   statusNote?: string;
+  statusNoteVariant?: "amber" | "blue";
 }

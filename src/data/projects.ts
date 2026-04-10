@@ -143,7 +143,9 @@ export const projects: Project[] = [
     owner: "Sales Team",
     status: "In Progress",
     lastUpdated: "2026-04-10",
-    statusNote: "Images and logo will be added — need names for the end slide",
+    assignee: "Kathy",
+    statusNote: "Awaiting additional review — awaiting names for the ending slide",
+    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
