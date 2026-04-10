@@ -141,8 +141,9 @@ export const projects: Project[] = [
     projectName: "Streamlight",
     description: "Presentation materials and working assets for the Streamlight project.",
     owner: "Sales Team",
-    status: "Draft",
-    lastUpdated: "2026-04-08",
+    status: "In Progress",
+    lastUpdated: "2026-04-10",
+    statusNote: "Images and logo will be added — need names for the end slide",
     assets: {
       sop: {
         label: "SOP",
@@ -172,7 +173,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://streamlight.vercel.app",
         downloadUrl: "",
       },
     },
