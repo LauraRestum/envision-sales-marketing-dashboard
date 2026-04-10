@@ -9,6 +9,8 @@ const variants: Record<ProjectStatus, string> = {
     "bg-emerald-50 text-emerald-700",
   Published:
     "bg-blue-50 text-blue-700",
+  Archived:
+    "bg-gray-100 text-gray-500",
 };
 
 const dotColors: Record<ProjectStatus, string> = {
@@ -16,6 +18,7 @@ const dotColors: Record<ProjectStatus, string> = {
   "In Progress": "bg-amber-500",
   Ready: "bg-emerald-500",
   Published: "bg-blue-500",
+  Archived: "bg-gray-400",
 };
 
 export function StatusBadge({ status }: { status: ProjectStatus }) {

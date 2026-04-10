@@ -8,6 +8,7 @@ const statuses: Array<ProjectStatus | "All"> = [
   "In Progress",
   "Ready",
   "Published",
+  "Archived",
 ];
 
 interface StatusFilterProps {
