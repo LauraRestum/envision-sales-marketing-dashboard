@@ -94,6 +94,15 @@ body {
   animation: glow-blue 1.5s ease-in-out infinite;
 }
 
+@keyframes glow-purple {
+  0%, 100% { box-shadow: 0 0 4px 1px rgba(139, 92, 246, 0.5); }
+  50% { box-shadow: 0 0 10px 3px rgba(139, 92, 246, 0.85); }
+}
+
+.animate-glow-purple {
+  animation: glow-purple 1.5s ease-in-out infinite;
+}
+
 /* ─── Reduced motion ────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
