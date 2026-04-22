@@ -141,6 +141,48 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "lange",
+    projectName: "Lange",
+    description: "Presentation materials and working assets for the Lange project.",
+    owner: "Sales Team",
+    status: "Draft",
+    lastUpdated: "2026-04-22",
+    assignee: "Sebastian",
+    assets: {
+      sop: {
+        label: "SOP",
+        description: "Standard operating procedure",
+        url: "",
+        downloadUrl: "",
+      },
+      internalBrief: {
+        label: "Internal Brief",
+        description: "Internal strategy and context brief",
+        url: "",
+        downloadUrl: "",
+      },
+      externalBrief: {
+        label: "External Brief",
+        description: "Client-facing brief",
+        url: "",
+        downloadUrl: "",
+      },
+      draftedHtml: {
+        label: "Drafted HTML",
+        description: "Draft HTML presentation",
+        url: "",
+        downloadUrl: "",
+        feedbackEnabled: true,
+      },
+      publishedApplication: {
+        label: "Published Application",
+        description: "Published live experience",
+        url: "https://niar-lange.vercel.app",
+        downloadUrl: "",
+      },
+    },
+  },
+  {
     id: "under-armour",
     projectName: "Under Armour",
     description: "Presentation materials and working assets for the Under Armour project.",
