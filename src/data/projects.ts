@@ -60,6 +60,7 @@ export const projects: Project[] = [
     status: "In Progress",
     lastUpdated: "2026-04-10",
     assignee: "Kathy",
+    archived: true,
     statusNote: "Awaiting additional review — awaiting names for the ending slide",
     statusNoteVariant: "blue",
     assets: {
@@ -104,6 +105,7 @@ export const projects: Project[] = [
     status: "Published",
     lastUpdated: "2026-04-08",
     assignee: "Rob",
+    archived: true,
     statusNote: "Awaiting additional feedback",
     statusNoteVariant: "blue",
     assets: {
@@ -145,9 +147,12 @@ export const projects: Project[] = [
     projectName: "Lange — Presentation",
     description: "Presentation materials and working assets for the Lange presentation.",
     owner: "Sales Team",
-    status: "Draft",
+    status: "Published",
     lastUpdated: "2026-04-22",
     assignee: "Sebastian",
+    statusNote: "In production",
+    statusNoteVariant: "blue",
+    updateNote: "Updated as of 6:32am Wednesday",
     assets: {
       sop: {
         label: "SOP",
@@ -187,9 +192,12 @@ export const projects: Project[] = [
     projectName: "Lange — One-on-One Meeting",
     description: "Materials and working assets for the Lange one-on-one meeting.",
     owner: "Sales Team",
-    status: "Draft",
+    status: "Published",
     lastUpdated: "2026-04-22",
     assignee: "Sebastian",
+    statusNote: "In production",
+    statusNoteVariant: "blue",
+    updateNote: "Updated as of 6:32am Wednesday",
     assets: {
       sop: {
         label: "SOP",

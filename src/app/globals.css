@@ -103,6 +103,15 @@ body {
   animation: glow-purple 1.5s ease-in-out infinite;
 }
 
+@keyframes glow-emerald {
+  0%, 100% { box-shadow: 0 0 4px 1px rgba(16, 185, 129, 0.5); }
+  50% { box-shadow: 0 0 10px 3px rgba(16, 185, 129, 0.85); }
+}
+
+.animate-glow-emerald {
+  animation: glow-emerald 1.5s ease-in-out infinite;
+}
+
 /* ─── Reduced motion ────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

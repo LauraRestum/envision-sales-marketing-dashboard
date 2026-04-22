@@ -30,5 +30,6 @@ export interface Project {
   assignee?: string;
   statusNote?: string;
   statusNoteVariant?: "amber" | "blue" | "purple";
+  updateNote?: string;
   archived?: boolean;
 }

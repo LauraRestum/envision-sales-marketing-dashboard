@@ -108,23 +108,33 @@ export function ProjectCard({ project }: { project: Project }) {
           )}
 
           {/* Status note (e.g. "Has updates") */}
-          {project.statusNote && (
-            project.statusNoteVariant === "blue" ? (
-              <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-xs font-medium text-blue-700">
-                <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
-                {project.statusNote}
-              </div>
-            ) : project.statusNoteVariant === "purple" ? (
-              <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-violet-50 border border-violet-200 px-2.5 py-0.5 text-xs font-medium text-violet-700">
-                <span className="inline-block h-2 w-2 rounded-full bg-violet-500 animate-glow-purple" />
-                {project.statusNote}
-              </div>
-            ) : (
-              <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-                {project.statusNote}
-              </div>
-            )
+          {(project.statusNote || project.updateNote) && (
+            <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+              {project.statusNote && (
+                project.statusNoteVariant === "blue" ? (
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-xs font-medium text-blue-700">
+                    <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
+                    {project.statusNote}
+                  </div>
+                ) : project.statusNoteVariant === "purple" ? (
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 border border-violet-200 px-2.5 py-0.5 text-xs font-medium text-violet-700">
+                    <span className="inline-block h-2 w-2 rounded-full bg-violet-500 animate-glow-purple" />
+                    {project.statusNote}
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+                    <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                    {project.statusNote}
+                  </div>
+                )
+              )}
+              {project.updateNote && (
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
+                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-glow-emerald" />
+                  {project.updateNote}
+                </div>
+              )}
+            </div>
           )}
 
           {/* Row 3: meta */}
