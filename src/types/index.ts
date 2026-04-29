@@ -27,6 +27,7 @@ export interface Project {
   status: ProjectStatus;
   lastUpdated: string;
   assets: ProjectAssets;
+  extras?: Asset[];
   assignee?: string;
   statusNote?: string;
   statusNoteVariant?: "amber" | "blue" | "purple";

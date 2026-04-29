@@ -364,6 +364,18 @@ export const projects: Project[] = [
         downloadUrl: "",
       },
     },
+    extras: [
+      {
+        label: "Card — Front",
+        description: "Printable H2F card (front)",
+        downloadUrl: "/assets/h2f/H2F-Front.pdf",
+      },
+      {
+        label: "Card — Back",
+        description: "Printable H2F card (back)",
+        downloadUrl: "/assets/h2f/H2F-Back.pdf",
+      },
+    ],
   },
   {
     id: "steris",
