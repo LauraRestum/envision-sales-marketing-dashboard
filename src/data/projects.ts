@@ -331,6 +331,7 @@ export const projects: Project[] = [
     assignee: "Kathy",
     statusNote: "Ready for review",
     statusNoteVariant: "blue",
+    extraNote: "Card added",
     assets: {
       sop: {
         label: "SOP",

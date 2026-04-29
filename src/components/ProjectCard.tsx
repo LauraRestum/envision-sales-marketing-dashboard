@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { Project, AssetKey } from "@/types";
+import type { Asset, Project, AssetKey } from "@/types";
 import { appConfig } from "@/data/config";
 import { StatusBadge } from "./StatusBadge";
 import { AssetRow } from "./AssetRow";
+import { DocumentViewer } from "./DocumentViewer";
 
 const ADDITIONAL_ASSET_ORDER: AssetKey[] = [
   "sop",
@@ -93,12 +94,91 @@ function buildFeedbackMailto(projectName: string, liveUrl?: string): string {
   return `mailto:${appConfig.feedbackEmail}?subject=${subject}&body=${body}`;
 }
 
+function hasAssetContent(asset: Asset): boolean {
+  return Boolean(asset.url) || Boolean(asset.downloadUrl) || Boolean(asset.feedbackEnabled);
+}
+
+function CardPreview({
+  asset,
+  projectName,
+  onView,
+}: {
+  asset: Asset;
+  projectName: string;
+  onView: () => void;
+}) {
+  const previewUrl = asset.downloadUrl || asset.url;
+  return (
+    <div className="flex flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)] overflow-hidden">
+      <button
+        type="button"
+        onClick={onView}
+        aria-label={`Preview ${projectName} ${asset.label}`}
+        className="relative block w-full aspect-[3/4] bg-white overflow-hidden cursor-pointer group"
+      >
+        {previewUrl ? (
+          <>
+            <iframe
+              src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+              className="absolute inset-0 h-full w-full pointer-events-none"
+              title={`${projectName} ${asset.label} preview`}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-[var(--duration-base)]" />
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center text-xs text-[var(--color-text-muted)]">
+            No preview
+          </div>
+        )}
+      </button>
+      <div className="flex items-center justify-between gap-2 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-[var(--color-text)] truncate">
+            {asset.label}
+          </p>
+          {asset.description && (
+            <p className="text-xs text-[var(--color-text-muted)] truncate">
+              {asset.description}
+            </p>
+          )}
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          {previewUrl && (
+            <button
+              type="button"
+              onClick={onView}
+              className="inline-flex items-center gap-1 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-2.5 py-1 text-xs font-medium text-white shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-primary-hover)] cursor-pointer"
+            >
+              View
+            </button>
+          )}
+          {asset.downloadUrl && (
+            <a
+              href={asset.downloadUrl}
+              download
+              className="inline-flex items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] cursor-pointer"
+            >
+              Download
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
   const [showAdditional, setShowAdditional] = useState(false);
+  const [previewAsset, setPreviewAsset] = useState<Asset | null>(null);
 
   const liveUrl = project.assets.publishedApplication.url;
   const hasLive = Boolean(liveUrl);
+  const visibleAssetKeys = ADDITIONAL_ASSET_ORDER.filter((key) =>
+    hasAssetContent(project.assets[key])
+  );
+  const extras = project.extras ?? [];
 
   return (
     <article
@@ -169,6 +249,12 @@ export function ProjectCard({ project }: { project: Project }) {
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
                   <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-glow-emerald" />
                   {project.updateNote}
+                </div>
+              )}
+              {project.extraNote && (
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
+                  <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
+                  {project.extraNote}
                 </div>
               )}
             </div>
@@ -243,27 +329,49 @@ export function ProjectCard({ project }: { project: Project }) {
               }`}
             >
               <div className="overflow-hidden">
-                <div className="flex flex-col gap-2 pt-2">
-                  {ADDITIONAL_ASSET_ORDER.map((key) => (
+                <div className="flex flex-col gap-3 pt-2">
+                  {extras.length > 0 && (
+                    <div
+                      className={`grid gap-3 ${
+                        extras.length > 1 ? "sm:grid-cols-2" : "grid-cols-1"
+                      }`}
+                    >
+                      {extras.map((asset, idx) => (
+                        <CardPreview
+                          key={`extra-${idx}`}
+                          asset={asset}
+                          projectName={project.projectName}
+                          onView={() => setPreviewAsset(asset)}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {visibleAssetKeys.map((key) => (
                     <AssetRow
                       key={key}
                       asset={project.assets[key]}
                       projectName={project.projectName}
                     />
                   ))}
-                  {project.extras?.map((asset, idx) => (
-                    <AssetRow
-                      key={`extra-${idx}`}
-                      asset={asset}
-                      projectName={project.projectName}
-                    />
-                  ))}
+                  {extras.length === 0 && visibleAssetKeys.length === 0 && (
+                    <p className="px-1 py-2 text-xs italic text-[var(--color-text-muted)]">
+                      No additional assets yet.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {previewAsset && (previewAsset.downloadUrl || previewAsset.url) && (
+        <DocumentViewer
+          url={(previewAsset.downloadUrl || previewAsset.url) as string}
+          title={`${project.projectName} — ${previewAsset.label}`}
+          onClose={() => setPreviewAsset(null)}
+        />
+      )}
     </article>
   );
 }
