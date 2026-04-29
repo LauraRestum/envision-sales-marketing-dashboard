@@ -28,6 +28,7 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
   }, [handleKeyDown]);
 
   const isHtml = /\.html?$/i.test(url);
+  const isPdf = /\.pdf(\?.*)?$/i.test(url);
 
   // For Google Docs viewer, convert relative URLs to absolute (Google needs a full URL)
   const absoluteUrl =
@@ -35,10 +36,11 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
       ? `${window.location.origin}${url}`
       : url;
 
-  // Render HTML files directly; use Google Docs viewer for office documents
-  const viewerUrl = isHtml
-    ? url
-    : `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+  // Render HTML and PDF files natively in the browser; fall back to Google Docs viewer for office documents
+  const viewerUrl =
+    isHtml || isPdf
+      ? url
+      : `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
 
   return (
     <div

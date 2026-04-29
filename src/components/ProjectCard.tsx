@@ -251,6 +251,13 @@ export function ProjectCard({ project }: { project: Project }) {
                       projectName={project.projectName}
                     />
                   ))}
+                  {project.extras?.map((asset, idx) => (
+                    <AssetRow
+                      key={`extra-${idx}`}
+                      asset={asset}
+                      projectName={project.projectName}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
