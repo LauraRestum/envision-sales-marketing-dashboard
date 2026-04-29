@@ -360,7 +360,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://envision-h2f.vercel.app",
         downloadUrl: "",
       },
     },
