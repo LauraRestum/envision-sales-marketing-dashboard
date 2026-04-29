@@ -150,6 +150,7 @@ export const projects: Project[] = [
     status: "Published",
     lastUpdated: "2026-04-22",
     assignee: "Sebastian",
+    archived: true,
     statusNote: "In production",
     statusNoteVariant: "blue",
     updateNote: "Updated as of 6:32am Wednesday",
@@ -195,6 +196,7 @@ export const projects: Project[] = [
     status: "Published",
     lastUpdated: "2026-04-22",
     assignee: "Sebastian",
+    archived: true,
     statusNote: "In production",
     statusNoteVariant: "blue",
     updateNote: "Updated as of 6:32am Wednesday",
@@ -280,9 +282,11 @@ export const projects: Project[] = [
     projectName: "Genesis Health Club",
     description: "Presentation materials and working assets for the Genesis Health Club project.",
     owner: "Sales Team",
-    status: "Draft",
+    status: "Ready",
     lastUpdated: "2026-04-29",
     assignee: "Rob",
+    statusNote: "Ready for review",
+    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
@@ -312,7 +316,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://print-ghc.vercel.app",
         downloadUrl: "",
       },
     },
@@ -322,9 +326,11 @@ export const projects: Project[] = [
     projectName: "H2F",
     description: "Presentation materials and working assets for the H2F project.",
     owner: "Sales Team",
-    status: "Draft",
+    status: "Ready",
     lastUpdated: "2026-04-29",
     assignee: "Kathy",
+    statusNote: "Ready for review",
+    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",

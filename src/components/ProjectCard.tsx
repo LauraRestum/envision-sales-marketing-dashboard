@@ -149,7 +149,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
               {project.statusNote && (
                 project.statusNoteVariant === "blue" ? (
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-2.5 py-0.5 text-xs font-medium text-blue-700">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
                     <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
                     {project.statusNote}
                   </div>
