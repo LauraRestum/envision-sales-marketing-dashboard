@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import type { Project, AssetKey } from "@/types";
+import { appConfig } from "@/data/config";
 import { StatusBadge } from "./StatusBadge";
 import { AssetRow } from "./AssetRow";
 
-const ASSET_ORDER: AssetKey[] = [
+const ADDITIONAL_ASSET_ORDER: AssetKey[] = [
   "sop",
   "internalBrief",
   "externalBrief",
   "draftedHtml",
-  "publishedApplication",
 ];
 
 function ChevronIcon({ open }: { open: boolean }) {
@@ -51,6 +51,30 @@ function UserIcon() {
   );
 }
 
+function ExternalLinkIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
+  );
+}
+
+function MailIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+    </svg>
+  );
+}
+
+function FolderIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+    </svg>
+  );
+}
+
 function formatDate(dateString: string): string {
   const date = new Date(dateString + "T00:00:00");
   return date.toLocaleDateString("en-US", {
@@ -60,8 +84,21 @@ function formatDate(dateString: string): string {
   });
 }
 
+function buildFeedbackMailto(projectName: string, liveUrl?: string): string {
+  const subject = encodeURIComponent(`Feedback on ${projectName}`);
+  const linkLine = liveUrl ? `\n\nLink:\n${liveUrl}` : "";
+  const body = encodeURIComponent(
+    `I am giving feedback on ${projectName}.${linkLine}\n\nFeedback:\n`
+  );
+  return `mailto:${appConfig.feedbackEmail}?subject=${subject}&body=${body}`;
+}
+
 export function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
+  const [showAdditional, setShowAdditional] = useState(false);
+
+  const liveUrl = project.assets.publishedApplication.url;
+  const hasLive = Boolean(liveUrl);
 
   return (
     <article
@@ -153,24 +190,70 @@ export function ProjectCard({ project }: { project: Project }) {
         <ChevronIcon open={open} />
       </button>
 
-      {/* ── Expandable asset list ─────────────────────────── */}
+      {/* ── Expandable action panel ───────────────────────── */}
       <div
         className={`grid transition-[grid-template-rows] duration-[var(--duration-slow)] ${
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="flex flex-col gap-2 border-t border-[var(--color-border)] px-5 pt-4 pb-5">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-              Assets
-            </p>
-            {ASSET_ORDER.map((key) => (
-              <AssetRow
-                key={key}
-                asset={project.assets[key]}
-                projectName={project.projectName}
-              />
-            ))}
+          <div className="flex flex-col gap-3 border-t border-[var(--color-border)] px-5 pt-5 pb-5">
+            {/* Live link — primary big button */}
+            {hasLive ? (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-primary)] px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-primary-hover)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+              >
+                <ExternalLinkIcon />
+                Open Live Link
+              </a>
+            ) : (
+              <div className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-bg)] px-5 py-3.5 text-sm font-medium text-[var(--color-text-muted)]">
+                Live link not yet available
+              </div>
+            )}
+
+            {/* Give Feedback — small button below live link */}
+            <a
+              href={buildFeedbackMailto(project.projectName, liveUrl)}
+              className="inline-flex items-center justify-center gap-1.5 self-center rounded-[var(--radius-md)] border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-amber-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+            >
+              <MailIcon />
+              Give Feedback
+            </a>
+
+            {/* Additional Assets — primary big button */}
+            <button
+              type="button"
+              onClick={() => setShowAdditional((prev) => !prev)}
+              aria-expanded={showAdditional}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-primary)] bg-[var(--color-primary-light)] px-5 py-3.5 text-sm font-semibold text-[var(--color-primary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-blue-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+            >
+              <FolderIcon />
+              Additional Assets
+              <ChevronIcon open={showAdditional} />
+            </button>
+
+            {/* Nested asset list */}
+            <div
+              className={`grid transition-[grid-template-rows] duration-[var(--duration-base)] ${
+                showAdditional ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <div className="flex flex-col gap-2 pt-2">
+                  {ADDITIONAL_ASSET_ORDER.map((key) => (
+                    <AssetRow
+                      key={key}
+                      asset={project.assets[key]}
+                      projectName={project.projectName}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
