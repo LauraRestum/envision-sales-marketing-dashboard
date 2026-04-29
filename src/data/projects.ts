@@ -4,8 +4,9 @@ import type { Project } from "@/types";
  * Central data source for all projects.
  *
  * To add a new project, copy an existing entry, change the `id`
- * (must be unique), and fill in the fields. Assets with empty
- * `url` and `downloadUrl` will render as "Not yet added".
+ * (must be unique), and fill in the fields. Each project has a
+ * Published Application (live link) and an optional list of
+ * additional assets.
  */
 export const projects: Project[] = [
   {
@@ -19,37 +20,26 @@ export const projects: Project[] = [
     statusNote: "Edits actively in progress",
     statusNoteVariant: "purple",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Internal_Brief.docx",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Philips_External.docx",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
         url: "https://phillips-oem-controlled-gateway.vercel.app",
         downloadUrl: "",
       },
+      additionalAssets: [
+        {
+          label: "Internal Brief",
+          description: "Internal strategy and context brief",
+          url: "",
+          downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Internal_Brief.docx",
+        },
+        {
+          label: "External Brief",
+          description: "Client-facing brief",
+          url: "",
+          downloadUrl: "/assets/phillips/Controlled_OEM_Gateway_Philips_External.docx",
+        },
+      ],
     },
   },
   {
@@ -64,31 +54,6 @@ export const projects: Project[] = [
     statusNote: "Awaiting additional review — awaiting names for the ending slide",
     statusNoteVariant: "blue",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -109,31 +74,6 @@ export const projects: Project[] = [
     statusNote: "Awaiting additional feedback",
     statusNoteVariant: "blue",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -154,31 +94,6 @@ export const projects: Project[] = [
     statusNoteVariant: "blue",
     updateNote: "Updated as of 6:32am Wednesday",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -199,31 +114,6 @@ export const projects: Project[] = [
     statusNoteVariant: "blue",
     updateNote: "Updated as of 6:32am Wednesday",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -242,31 +132,6 @@ export const projects: Project[] = [
     assignee: "Sebastian",
     archived: true,
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "This has been updated — see the live version for the most current",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: false,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -284,31 +149,6 @@ export const projects: Project[] = [
     lastUpdated: "2026-04-29",
     assignee: "Rob",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -326,31 +166,6 @@ export const projects: Project[] = [
     lastUpdated: "2026-04-29",
     assignee: "Kathy",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
@@ -368,31 +183,6 @@ export const projects: Project[] = [
     lastUpdated: "2026-04-29",
     assignee: "Dedra",
     assets: {
-      sop: {
-        label: "SOP",
-        description: "Standard operating procedure",
-        url: "",
-        downloadUrl: "",
-      },
-      internalBrief: {
-        label: "Internal Brief",
-        description: "Internal strategy and context brief",
-        url: "",
-        downloadUrl: "",
-      },
-      externalBrief: {
-        label: "External Brief",
-        description: "Client-facing brief",
-        url: "",
-        downloadUrl: "",
-      },
-      draftedHtml: {
-        label: "Drafted HTML",
-        description: "Draft HTML presentation",
-        url: "",
-        downloadUrl: "",
-        feedbackEnabled: true,
-      },
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",

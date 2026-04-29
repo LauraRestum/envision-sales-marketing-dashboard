@@ -10,14 +10,9 @@ export interface Asset {
 }
 
 export interface ProjectAssets {
-  sop: Asset;
-  internalBrief: Asset;
-  externalBrief: Asset;
-  draftedHtml: Asset;
   publishedApplication: Asset;
+  additionalAssets?: Asset[];
 }
-
-export type AssetKey = keyof ProjectAssets;
 
 export interface Project {
   id: string;

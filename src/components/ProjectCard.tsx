@@ -1,17 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { Project, AssetKey } from "@/types";
+import type { Project } from "@/types";
 import { StatusBadge } from "./StatusBadge";
 import { AssetRow } from "./AssetRow";
-
-const ASSET_ORDER: AssetKey[] = [
-  "sop",
-  "internalBrief",
-  "externalBrief",
-  "draftedHtml",
-  "publishedApplication",
-];
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
@@ -164,13 +156,24 @@ export function ProjectCard({ project }: { project: Project }) {
             <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
               Assets
             </p>
-            {ASSET_ORDER.map((key) => (
-              <AssetRow
-                key={key}
-                asset={project.assets[key]}
-                projectName={project.projectName}
-              />
-            ))}
+            <AssetRow
+              asset={project.assets.publishedApplication}
+              projectName={project.projectName}
+            />
+            {project.assets.additionalAssets && project.assets.additionalAssets.length > 0 && (
+              <>
+                <p className="mt-3 mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+                  Additional Assets
+                </p>
+                {project.assets.additionalAssets.map((asset, idx) => (
+                  <AssetRow
+                    key={`additional-${idx}`}
+                    asset={asset}
+                    projectName={project.projectName}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
