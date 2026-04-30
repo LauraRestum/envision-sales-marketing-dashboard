@@ -327,7 +327,7 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the H2F project.",
     owner: "Sales Team",
     status: "Ready",
-    lastUpdated: "2026-04-29",
+    lastUpdated: "2026-04-30",
     assignee: "Kathy",
     statusNote: "Ready for review",
     statusNoteVariant: "blue",
