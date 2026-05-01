@@ -383,9 +383,11 @@ export const projects: Project[] = [
     projectName: "Steris",
     description: "Presentation materials and working assets for the Steris project.",
     owner: "Sales Team",
-    status: "Draft",
-    lastUpdated: "2026-04-29",
+    status: "Ready",
+    lastUpdated: "2026-05-01",
     assignee: "Dedra",
+    statusNote: "Ready for review",
+    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
@@ -415,7 +417,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://envision-steris.vercel.app",
         downloadUrl: "",
       },
     },
