@@ -29,6 +29,7 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
 
   const isHtml = /\.html?$/i.test(url);
   const isPdf = /\.pdf(\?.*)?$/i.test(url);
+  const isImage = /\.(jpe?g|png|gif|webp|avif|svg)(\?|#|$)/i.test(url);
 
   // For Google Docs viewer, convert relative URLs to absolute (Google needs a full URL)
   const absoluteUrl =
@@ -36,9 +37,9 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
       ? `${window.location.origin}${url}`
       : url;
 
-  // Render HTML and PDF files natively in the browser; fall back to Google Docs viewer for office documents
+  // Render HTML, PDF, and image files natively in the browser; fall back to Google Docs viewer for office documents
   const viewerUrl =
-    isHtml || isPdf
+    isHtml || isPdf || isImage
       ? url
       : `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
 
@@ -97,12 +98,22 @@ export function DocumentViewer({ url, title, onClose }: DocumentViewerProps) {
               </div>
             </div>
           )}
-          <iframe
-            src={viewerUrl}
-            className="h-full w-full border-0"
-            title={`Document viewer: ${title}`}
-            onLoad={() => setLoading(false)}
-          />
+          {isImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={viewerUrl}
+              alt={title}
+              className="h-full w-full object-contain bg-[var(--color-bg)]"
+              onLoad={() => setLoading(false)}
+            />
+          ) : (
+            <iframe
+              src={viewerUrl}
+              className="h-full w-full border-0"
+              title={`Document viewer: ${title}`}
+              onLoad={() => setLoading(false)}
+            />
+          )}
         </div>
       </div>
     </div>
