@@ -369,7 +369,7 @@ export const projects: Project[] = [
       {
         label: "Card — Front",
         description: "Printable H2F card (front)",
-        downloadUrl: "/assets/h2f/H2F-Front.pdf",
+        downloadUrl: "/assets/h2f/H2F-Front.jpg",
       },
       {
         label: "Card — Back",
