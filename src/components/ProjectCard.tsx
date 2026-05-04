@@ -108,22 +108,33 @@ function CardPreview({
   onView: () => void;
 }) {
   const previewUrl = asset.downloadUrl || asset.url;
+  const isImage = previewUrl ? /\.(jpe?g|png|gif|webp|avif|svg)(\?|#|$)/i.test(previewUrl) : false;
   return (
     <div className="flex flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)] overflow-hidden">
       <button
         type="button"
         onClick={onView}
         aria-label={`Preview ${projectName} ${asset.label}`}
-        className="relative block w-full aspect-[3/4] bg-white overflow-hidden cursor-pointer group"
+        className={`relative block w-full ${isImage ? "aspect-[7/4]" : "aspect-[3/4]"} bg-white overflow-hidden cursor-pointer group`}
       >
         {previewUrl ? (
           <>
-            <iframe
-              src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-              className="absolute inset-0 h-full w-full pointer-events-none"
-              title={`${projectName} ${asset.label} preview`}
-              loading="lazy"
-            />
+            {isImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={previewUrl}
+                alt={`${projectName} ${asset.label} preview`}
+                className="absolute inset-0 h-full w-full object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <iframe
+                src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                className="absolute inset-0 h-full w-full pointer-events-none"
+                title={`${projectName} ${asset.label} preview`}
+                loading="lazy"
+              />
+            )}
             <div className="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-[var(--duration-base)]" />
           </>
         ) : (
