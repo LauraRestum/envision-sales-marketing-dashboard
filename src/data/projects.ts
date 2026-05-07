@@ -327,9 +327,9 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the H2F project.",
     owner: "Sales Team",
     status: "Ready",
-    lastUpdated: "2026-04-30",
+    lastUpdated: "2026-05-07",
     assignee: "Kathy",
-    statusNote: "Ready for review",
+    statusNote: "Cards sent to print, live page in final state",
     statusNoteVariant: "blue",
     extraNote: "Card added",
     assets: {
@@ -386,6 +386,7 @@ export const projects: Project[] = [
     status: "Ready",
     lastUpdated: "2026-05-01",
     assignee: "Dedra",
+    archived: true,
     statusNote: "Ready for review",
     statusNoteVariant: "blue",
     assets: {
