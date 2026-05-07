@@ -285,8 +285,8 @@ export const projects: Project[] = [
     status: "Ready",
     lastUpdated: "2026-04-29",
     assignee: "Rob",
-    statusNote: "Ready for review",
-    statusNoteVariant: "blue",
+    statusNote: "Awaiting next steps",
+    statusNoteVariant: "amber",
     assets: {
       sop: {
         label: "SOP",
@@ -329,9 +329,8 @@ export const projects: Project[] = [
     status: "Ready",
     lastUpdated: "2026-05-07",
     assignee: "Kathy",
-    statusNote: "Cards sent to print, live page in final state",
-    statusNoteVariant: "blue",
-    extraNote: "Card added",
+    statusNote: ["Cards sent to print", "Live page — final state"],
+    statusNoteVariant: "green",
     assets: {
       sop: {
         label: "SOP",

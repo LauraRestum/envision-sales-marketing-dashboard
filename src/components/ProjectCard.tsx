@@ -239,22 +239,29 @@ export function ProjectCard({ project }: { project: Project }) {
           {(project.statusNote || project.updateNote) && (
             <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
               {project.statusNote && (
-                project.statusNoteVariant === "blue" ? (
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
-                    <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
-                    {project.statusNote}
-                  </div>
-                ) : project.statusNoteVariant === "purple" ? (
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 border border-violet-200 px-2.5 py-0.5 text-xs font-medium text-violet-700">
-                    <span className="inline-block h-2 w-2 rounded-full bg-violet-500 animate-glow-purple" />
-                    {project.statusNote}
-                  </div>
-                ) : (
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                    <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-                    {project.statusNote}
-                  </div>
-                )
+                (Array.isArray(project.statusNote) ? project.statusNote : [project.statusNote]).map((note, i) => (
+                  project.statusNoteVariant === "blue" ? (
+                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
+                      <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
+                      {note}
+                    </div>
+                  ) : project.statusNoteVariant === "purple" ? (
+                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 border border-violet-200 px-2.5 py-0.5 text-xs font-medium text-violet-700">
+                      <span className="inline-block h-2 w-2 rounded-full bg-violet-500 animate-glow-purple" />
+                      {note}
+                    </div>
+                  ) : project.statusNoteVariant === "green" ? (
+                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-300 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 animate-glow-emerald">
+                      <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-glow-emerald" />
+                      {note}
+                    </div>
+                  ) : (
+                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+                      <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                      {note}
+                    </div>
+                  )
+                ))
               )}
               {project.updateNote && (
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
