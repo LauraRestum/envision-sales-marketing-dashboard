@@ -29,8 +29,8 @@ export interface Project {
   assets: ProjectAssets;
   extras?: Asset[];
   assignee?: string;
-  statusNote?: string;
-  statusNoteVariant?: "amber" | "blue" | "purple";
+  statusNote?: string | string[];
+  statusNoteVariant?: "amber" | "blue" | "purple" | "green";
   updateNote?: string;
   extraNote?: string;
   archived?: boolean;
