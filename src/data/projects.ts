@@ -13,11 +13,11 @@ export const projects: Project[] = [
     projectName: "Phillips",
     description: "Presentation materials and working assets for the Phillips project.",
     owner: "Sales Team",
-    status: "Draft",
-    lastUpdated: "2026-04-08",
+    status: "Ready",
+    lastUpdated: "2026-05-08",
     assignee: "Dedra",
-    statusNote: "Edits actively in progress",
-    statusNoteVariant: "purple",
+    statusNote: "Ready for use",
+    statusNoteVariant: "green",
     assets: {
       sop: {
         label: "SOP",
