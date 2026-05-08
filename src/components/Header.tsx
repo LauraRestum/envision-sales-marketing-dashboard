@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 glass border-b border-[var(--color-border)]">
       <div className="accent-bar" />
-      <div className="mx-auto max-w-4xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <div className="flex items-center gap-2.5">

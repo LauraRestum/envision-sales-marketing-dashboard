@@ -170,7 +170,7 @@ export function Dashboard() {
   };
 
   return (
-    <main id="main-content" className="mx-auto w-full max-w-4xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+    <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
       {/* ── KPI insight strip ────────────────────────────────── */}
       <section
         aria-label="Project pipeline overview"
@@ -235,11 +235,15 @@ export function Dashboard() {
         <StatusFilter active={statusFilter} onChange={setStatusFilter} />
       </div>
 
-      {/* ── Active project list ─────────────────────────────── */}
+      {/* ── Active project list (Trello-style panels) ──────── */}
       {active.length > 0 ? (
-        <ul role="list" aria-label="Active projects" className="mt-6 flex flex-col gap-4">
+        <ul
+          role="list"
+          aria-label="Active projects"
+          className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 items-start"
+        >
           {active.map((project) => (
-            <li key={project.id}>
+            <li key={project.id} className="h-full">
               <ProjectCard project={project} />
             </li>
           ))}
@@ -314,9 +318,13 @@ export function Dashboard() {
             }`}
           >
             <div className="overflow-hidden">
-              <ul role="list" aria-label="Archived projects" className="flex flex-col gap-4 pt-4">
+              <ul
+                role="list"
+                aria-label="Archived projects"
+                className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2 xl:grid-cols-3 items-start"
+              >
                 {archived.map((project) => (
-                  <li key={project.id}>
+                  <li key={project.id} className="h-full">
                     <ProjectCard project={project} />
                   </li>
                 ))}
