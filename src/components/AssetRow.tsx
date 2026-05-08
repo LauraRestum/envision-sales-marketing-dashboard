@@ -90,7 +90,9 @@ export function AssetRow({ asset, projectName }: AssetRowProps) {
               <button
                 type="button"
                 onClick={() => setViewerOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-3 py-1.5 text-xs font-medium text-white shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-primary-hover)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                aria-label={`View ${asset.label} for ${projectName}`}
+                data-on-color="true"
+                className="btn-brand inline-flex items-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-3 py-1.5 text-xs text-white shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-primary-hover)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
               >
                 <EyeIcon />
                 View
@@ -102,7 +104,8 @@ export function AssetRow({ asset, projectName }: AssetRowProps) {
                 href={asset.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-primary)] bg-[var(--color-primary-light)] px-3 py-1.5 text-xs font-medium text-[var(--color-primary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-blue-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                aria-label={`Open ${asset.label} for ${projectName} in a new tab`}
+                className="btn-brand inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-primary)] bg-[var(--color-primary-light)] px-3 py-1.5 text-xs text-[var(--color-primary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
               >
                 <ExternalLinkIcon />
                 Open
@@ -113,7 +116,8 @@ export function AssetRow({ asset, projectName }: AssetRowProps) {
               <a
                 href={asset.downloadUrl}
                 download
-                className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                aria-label={`Download ${asset.label} for ${projectName}`}
+                className="btn-brand inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
               >
                 <DownloadIcon />
                 Download
@@ -123,10 +127,16 @@ export function AssetRow({ asset, projectName }: AssetRowProps) {
             {asset.feedbackEnabled && (
               <a
                 href={buildMailtoHref(projectName, asset.url)}
-                className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-amber-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                aria-label={`Email feedback about ${asset.label} for ${projectName}`}
+                className="btn-brand inline-flex items-center gap-1.5 rounded-[var(--radius-md)] px-3 py-1.5 text-xs shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                style={{
+                  background: "var(--color-warning-bg)",
+                  color: "#7a4a00",
+                  boxShadow: "inset 0 0 0 1px var(--color-warning-ring), var(--shadow-sm)",
+                }}
               >
                 <MailIcon />
-                Give Feedback
+                Give feedback
               </a>
             )}
           </div>
@@ -141,7 +151,7 @@ export function AssetRow({ asset, projectName }: AssetRowProps) {
       {viewerOpen && asset.downloadUrl && (
         <DocumentViewer
           url={asset.downloadUrl}
-          title={`${projectName} — ${asset.label}`}
+          title={`${projectName}: ${asset.label}`}
           onClose={() => setViewerOpen(false)}
         />
       )}

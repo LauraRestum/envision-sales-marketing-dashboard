@@ -25,6 +25,105 @@ function ArchiveIcon() {
   );
 }
 
+interface KpiTileProps {
+  label: string;
+  value: number;
+  total?: number;
+  tone: "primary" | "emerald" | "amber" | "violet";
+  active: boolean;
+  onClick: () => void;
+  ariaLabel: string;
+}
+
+const TONE_STYLES: Record<
+  KpiTileProps["tone"],
+  { bar: string; activeBg: string; ringColor: string; textColor: string; dot: string }
+> = {
+  primary: {
+    bar: "var(--gradient-primary-deep)",
+    activeBg: "rgba(0, 48, 135, 0.06)",
+    ringColor: "rgba(0, 48, 135, 0.40)",
+    textColor: "var(--brand-blue)",
+    dot: "var(--brand-blue)",
+  },
+  emerald: {
+    bar: "linear-gradient(135deg, var(--brand-green) 0%, var(--brand-bright-blue) 100%)",
+    activeBg: "rgba(120, 190, 33, 0.10)",
+    ringColor: "rgba(120, 190, 33, 0.55)",
+    textColor: "var(--brand-forest)",
+    dot: "var(--brand-green)",
+  },
+  amber: {
+    bar: "linear-gradient(135deg, var(--brand-goldenrod) 0%, var(--brand-terracotta) 100%)",
+    activeBg: "rgba(255, 184, 28, 0.14)",
+    ringColor: "rgba(255, 184, 28, 0.65)",
+    textColor: "#7a4a00",
+    dot: "var(--brand-goldenrod)",
+  },
+  violet: {
+    bar: "linear-gradient(135deg, var(--brand-violet) 0%, var(--brand-bright-blue) 100%)",
+    activeBg: "rgba(140, 71, 153, 0.08)",
+    ringColor: "rgba(140, 71, 153, 0.45)",
+    textColor: "var(--brand-violet)",
+    dot: "var(--brand-violet)",
+  },
+};
+
+function KpiTile({ label, value, total, tone, active, onClick, ariaLabel }: KpiTileProps) {
+  const t = TONE_STYLES[tone];
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-pressed={active}
+      className="group relative overflow-hidden rounded-[var(--radius-lg)] border px-3.5 py-3 text-left shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] cursor-pointer"
+      style={{
+        background: active ? t.activeBg : "var(--color-surface)",
+        borderColor: active ? "transparent" : "var(--color-border)",
+        boxShadow: active
+          ? `inset 0 0 0 2px ${t.ringColor}, var(--shadow-sm)`
+          : "var(--shadow-sm)",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-0.5"
+        style={{ background: t.bar }}
+      />
+      <div className="flex items-center gap-1.5">
+        <span
+          className="inline-block h-1.5 w-1.5 rounded-full"
+          style={{ background: t.dot }}
+          aria-hidden="true"
+        />
+        <p className="text-[0.65rem] font-bold uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+          {label}
+        </p>
+      </div>
+      <div className="mt-1.5 flex items-baseline gap-1.5">
+        <span
+          data-numeric="true"
+          className="text-2xl font-bold leading-none"
+          style={{ color: active ? t.textColor : "var(--color-text)" }}
+        >
+          {value}
+        </span>
+        {typeof total === "number" && (
+          <span data-numeric="true" className="text-xs font-medium text-[var(--color-text-muted)]">
+            / {total}
+          </span>
+        )}
+      </div>
+    </button>
+  );
+}
+
+function daysBetween(iso: string): number {
+  const then = new Date(iso + "T00:00:00").getTime();
+  return Math.floor((Date.now() - then) / (1000 * 60 * 60 * 24));
+}
+
 export function Dashboard() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<ProjectStatus | "All">("All");
@@ -53,8 +152,67 @@ export function Dashboard() {
 
   const totalShowing = active.length + archived.length;
 
+  const kpis = useMemo(() => {
+    const activeProjects = projects.filter((p) => !p.archived);
+    const ready = activeProjects.filter((p) => p.status === "Ready").length;
+    const inProgress = activeProjects.filter((p) => p.status === "In Progress").length;
+    const recent = activeProjects.filter((p) => daysBetween(p.lastUpdated) <= 30).length;
+    return {
+      total: activeProjects.length,
+      ready,
+      inProgress,
+      recent,
+    };
+  }, []);
+
+  const toggleStatus = (s: ProjectStatus) => {
+    setStatusFilter((current) => (current === s ? "All" : s));
+  };
+
   return (
-    <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+    <main id="main-content" className="mx-auto w-full max-w-4xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+      {/* ── KPI insight strip ────────────────────────────────── */}
+      <section
+        aria-label="Project pipeline overview"
+        className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3 animate-rise-in"
+      >
+        <KpiTile
+          label="Active"
+          value={kpis.total}
+          tone="primary"
+          active={statusFilter === "All"}
+          onClick={() => setStatusFilter("All")}
+          ariaLabel={`${kpis.total} active projects. Show all.`}
+        />
+        <KpiTile
+          label="In progress"
+          value={kpis.inProgress}
+          total={kpis.total}
+          tone="amber"
+          active={statusFilter === "In Progress"}
+          onClick={() => toggleStatus("In Progress")}
+          ariaLabel={`${kpis.inProgress} in progress. Filter.`}
+        />
+        <KpiTile
+          label="Ready"
+          value={kpis.ready}
+          total={kpis.total}
+          tone="emerald"
+          active={statusFilter === "Ready"}
+          onClick={() => toggleStatus("Ready")}
+          ariaLabel={`${kpis.ready} ready. Filter.`}
+        />
+        <KpiTile
+          label="Updated 30d"
+          value={kpis.recent}
+          total={kpis.total}
+          tone="violet"
+          active={false}
+          onClick={() => setSortBy("updated")}
+          ariaLabel={`${kpis.recent} updated in the last 30 days. Sort by newest.`}
+        />
+      </section>
+
       {/* ── Toolbar ─────────────────────────────────────────── */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex-1 max-w-md">
@@ -78,20 +236,32 @@ export function Dashboard() {
       </div>
 
       {/* ── Active project list ─────────────────────────────── */}
-      <div className="mt-6 flex flex-col gap-4">
-        {active.length > 0 ? (
-          active.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))
-        ) : (
-          <div className="flex flex-col items-center justify-center rounded-[var(--radius-xl)] border border-dashed border-[var(--color-border)] py-16 text-center">
+      {active.length > 0 ? (
+        <ul role="list" aria-label="Active projects" className="mt-6 flex flex-col gap-4">
+          {active.map((project) => (
+            <li key={project.id}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div
+          className="mt-6 flex flex-col items-center justify-center rounded-[var(--radius-xl)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] py-16 text-center"
+          role="status"
+          aria-live="polite"
+        >
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-full"
+            style={{ background: "rgba(0, 48, 135, 0.08)" }}
+            aria-hidden="true"
+          >
             <svg
-              className="mx-auto h-10 w-10 text-[var(--color-text-muted)]"
+              className="h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
+              strokeWidth={2}
+              stroke="var(--brand-blue)"
             >
               <path
                 strokeLinecap="round"
@@ -99,15 +269,15 @@ export function Dashboard() {
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
-            <p className="mt-3 text-sm font-medium text-[var(--color-text-secondary)]">
-              No projects found
-            </p>
-            <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-              Try adjusting your search or filters.
-            </p>
           </div>
-        )}
-      </div>
+          <p className="mt-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--color-text)]">
+            Nothing here yet
+          </p>
+          <p className="mt-1.5 max-w-sm text-sm text-[var(--color-text-secondary)]">
+            Adjust your search or filters to find the project you&rsquo;re looking for.
+          </p>
+        </div>
+      )}
 
       {/* ── Archived folder ─────────────────────────────────── */}
       {archived.length > 0 && (
@@ -115,12 +285,13 @@ export function Dashboard() {
           <button
             type="button"
             onClick={() => setArchivedOpen((prev) => !prev)}
-            className="flex w-full items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2.5 text-left text-sm font-medium text-[var(--color-text-secondary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] cursor-pointer"
+            className="flex w-full items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2.5 text-left text-sm font-bold uppercase tracking-[0.15em] text-[var(--color-text-secondary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] cursor-pointer"
             aria-expanded={archivedOpen}
+            aria-controls="archived-list"
           >
             <ArchiveIcon />
             <span className="flex-1">Archived</span>
-            <span className="rounded-full bg-[var(--color-bg)] px-2 py-0.5 text-xs text-[var(--color-text-muted)]">
+            <span data-numeric="true" className="rounded-full bg-[var(--color-bg)] px-2 py-0.5 text-xs font-bold text-[var(--color-text-secondary)]">
               {archived.length}
             </span>
             <svg
@@ -137,16 +308,19 @@ export function Dashboard() {
           </button>
 
           <div
+            id="archived-list"
             className={`grid transition-[grid-template-rows] duration-[var(--duration-slow)] ${
               archivedOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
             }`}
           >
             <div className="overflow-hidden">
-              <div className="flex flex-col gap-4 pt-4">
+              <ul role="list" aria-label="Archived projects" className="flex flex-col gap-4 pt-4">
                 {archived.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <li key={project.id}>
+                    <ProjectCard project={project} />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>
@@ -155,7 +329,7 @@ export function Dashboard() {
       {/* ── Result count ───────────────────────────────────── */}
       {totalShowing > 0 && (
         <p className="mt-4 text-xs text-[var(--color-text-muted)]">
-          Showing {totalShowing} of {projects.length} project{projects.length !== 1 ? "s" : ""}
+          Showing <span data-numeric="true" className="font-semibold text-[var(--color-text-secondary)]">{totalShowing}</span> of <span data-numeric="true">{projects.length}</span> project{projects.length !== 1 ? "s" : ""}
         </p>
       )}
     </main>

@@ -13,5 +13,5 @@ export const appConfig = {
 
   /** Short supporting description shown below the title. */
   description:
-    "Find presentation materials, briefs, and working assets for every project — all in one place.",
+    "Find presentation materials, briefs, and working assets for every project, all in one place.",
 } as const;

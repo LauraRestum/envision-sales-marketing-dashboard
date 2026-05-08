@@ -30,7 +30,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
         placeholder="Search projects\u2026"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] py-2.5 pl-10 pr-4 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] shadow-[var(--shadow-sm)] transition-[border-color,box-shadow] duration-[var(--duration-base)] focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] focus:outline-none"
+        className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] py-2.5 pl-10 pr-4 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] shadow-[var(--shadow-sm)] transition-[border-color,box-shadow,transform] duration-[var(--duration-base)] focus:border-[var(--color-primary)] focus:shadow-[0_0_0_4px_var(--color-primary-ring),var(--shadow-md)] focus:outline-none hover:border-[var(--color-border-hover)]"
       />
 
       {value && (

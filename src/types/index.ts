@@ -1,5 +1,16 @@
 export type ProjectStatus = "Draft" | "In Progress" | "Ready" | "Published" | "Presented";
 
+/**
+ * Envision brand pillars (per brand book architecture).
+ * https://brand-guidelines-nine.vercel.app
+ */
+export type Pillar =
+  | "Employment"
+  | "Outreach"
+  | "Rehabilitation"
+  | "Education"
+  | "Research";
+
 export interface Asset {
   label: string;
   description: string;
@@ -25,6 +36,7 @@ export interface Project {
   description: string;
   owner: string;
   status: ProjectStatus;
+  pillar?: Pillar;
   lastUpdated: string;
   assets: ProjectAssets;
   extras?: Asset[];
