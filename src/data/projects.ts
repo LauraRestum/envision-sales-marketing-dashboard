@@ -14,7 +14,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Phillips project.",
     owner: "Sales Team",
     status: "Draft",
-    pillar: "Employment",
     lastUpdated: "2026-04-08",
     assignee: "Dedra",
     statusNote: "Edits actively in progress",
@@ -59,7 +58,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Streamlight project.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-04-10",
     archived: true,
     assets: {
@@ -102,7 +100,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the APS project.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-04-08",
     archived: true,
     assets: {
@@ -145,7 +142,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Lange presentation.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-04-22",
     archived: true,
     assets: {
@@ -188,7 +184,6 @@ export const projects: Project[] = [
     description: "Materials and working assets for the Lange one-on-one meeting.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-04-22",
     archived: true,
     assets: {
@@ -231,7 +226,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Under Armour project.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-04-09",
     archived: true,
     assets: {
@@ -274,7 +268,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Genesis Health Club project.",
     owner: "Sales Team",
     status: "Ready",
-    pillar: "Employment",
     lastUpdated: "2026-04-29",
     assignee: "Rob",
     statusNote: "Awaiting next steps",
@@ -319,7 +312,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the H2F project.",
     owner: "Sales Team",
     status: "Ready",
-    pillar: "Employment",
     lastUpdated: "2026-05-07",
     assignee: "Kathy",
     statusNote: ["Cards sent to print", "Live page: final state"],
@@ -544,7 +536,6 @@ export const projects: Project[] = [
     description: "Presentation materials and working assets for the Steris project.",
     owner: "Sales Team",
     status: "Presented",
-    pillar: "Employment",
     lastUpdated: "2026-05-01",
     archived: true,
     assets: {
