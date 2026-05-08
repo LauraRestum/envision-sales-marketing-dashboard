@@ -1,4 +1,4 @@
-export type ProjectStatus = "Draft" | "In Progress" | "Ready" | "Published";
+export type ProjectStatus = "Draft" | "In Progress" | "Ready" | "Published" | "Presented";
 
 export interface Asset {
   label: string;
