@@ -40,7 +40,7 @@ export interface Project {
   lastUpdated: string;
   assets: ProjectAssets;
   extras?: Asset[];
-  assignee?: string;
+  assignee?: string | string[];
   statusNote?: string | string[];
   statusNoteVariant?: "amber" | "blue" | "purple" | "green";
   updateNote?: string;

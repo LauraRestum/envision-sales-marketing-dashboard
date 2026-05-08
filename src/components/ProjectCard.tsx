@@ -229,20 +229,23 @@ export function ProjectCard({ project }: { project: Project }) {
             <StatusBadge status={project.status} />
             {project.pillar && <PillarChip pillar={project.pillar} />}
             {project.assignee && (
-              <span
-                className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
-                style={{
-                  background: "rgba(140, 71, 153, 0.10)",
-                  color: "var(--brand-violet)",
-                  boxShadow: "inset 0 0 0 1px rgba(140, 71, 153, 0.32)",
-                }}
-              >
-                <svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                <span className="sr-only">Assigned to </span>
-                {project.assignee}
-              </span>
+              (Array.isArray(project.assignee) ? project.assignee : [project.assignee]).map((name) => (
+                <span
+                  key={name}
+                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                  style={{
+                    background: "rgba(140, 71, 153, 0.10)",
+                    color: "var(--brand-violet)",
+                    boxShadow: "inset 0 0 0 1px rgba(140, 71, 153, 0.32)",
+                  }}
+                >
+                  <svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                  </svg>
+                  <span className="sr-only">Assigned to </span>
+                  {name}
+                </span>
+              ))
             )}
           </div>
 
