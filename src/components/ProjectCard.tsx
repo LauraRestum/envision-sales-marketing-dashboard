@@ -193,12 +193,20 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article
-      className={`overflow-hidden rounded-[var(--radius-xl)] border bg-[var(--color-surface)] transition-all duration-[var(--duration-base)] ${
+      className={`group relative overflow-hidden rounded-[var(--radius-xl)] border bg-[var(--color-surface)] transition-all duration-[var(--duration-base)] ${
         open
-          ? "border-[var(--color-primary)]/30 shadow-[var(--shadow-md)]"
-          : "border-[var(--color-border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5"
+          ? "border-[var(--color-primary)]/30 shadow-[var(--shadow-lg)]"
+          : "border-[var(--color-border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 hover:border-[var(--color-border-hover)]"
       }`}
     >
+      {/* Gradient left edge on open */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-y-0 left-0 w-1 transition-opacity duration-[var(--duration-base)] ${
+          open ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ background: "var(--gradient-sunrise)" }}
+      />
       {/* ── Header (clickable toggle) ─────────────────────── */}
       <button
         type="button"
@@ -286,7 +294,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </span>
             <span className="inline-flex items-center gap-1">
               <CalendarIcon />
-              {formatDate(project.lastUpdated)}
+              <span data-numeric="true">{formatDate(project.lastUpdated)}</span>
             </span>
           </div>
         </div>
@@ -308,7 +316,8 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-primary)] px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-[var(--color-primary-hover)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+                style={{ background: "var(--gradient-trust)" }}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-glow-primary)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-lg)] cursor-pointer"
               >
                 <ExternalLinkIcon />
                 Open Live Link

@@ -1,62 +1,140 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ─────────────────────────────────────────────
-   Derived from the UX/UI Pro Max design intelligence system:
-   • SaaS-grade color palette (Trust Blue primary)
-   • 4 px spacing rhythm
-   • Plus Jakarta Sans typography
-   • WCAG AA+ contrast ratios
+   Modernized on top of the UX/UI Pro Max design intelligence:
+   • Warmer paper background (Envision brand: thriving, human)
+   • Full semantic status palette (bg / ring / fg / glow)
+   • Sunrise gradient accent (amber → coral → violet)
+   • Elevation system with colored shadows
+   • Sans (Plus Jakarta) + Mono (JetBrains) pairing
+   • WCAG AA+ contrast preserved
    ────────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Palette ── */
+  /* ── Brand / primary ── */
   --color-primary: #2563eb;
   --color-primary-hover: #1d4ed8;
   --color-primary-light: #eff6ff;
-  --color-accent: #f59e0b;
+  --color-primary-ring: rgba(37, 99, 235, 0.18);
 
-  --color-bg: #f8fafc;
+  /* ── Accent ramp (Envision warmth) ── */
+  --color-accent: #f59e0b;        /* amber */
+  --color-accent-warm: #f97316;   /* orange */
+  --color-accent-coral: #fb7185;  /* coral */
+  --color-accent-violet: #8b5cf6; /* violet */
+  --color-accent-teal: #14b8a6;   /* teal */
+
+  /* ── Surfaces ── */
+  --color-bg: #fbf9f6;            /* warm paper, not stark slate */
+  --color-bg-elevated: #ffffff;
   --color-surface: #ffffff;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
+  --color-surface-tinted: #f5f0e8; /* sand tint for hover/secondary */
+  --color-border: #ece6dc;
+  --color-border-hover: #d6cdbf;
+  --color-border-strong: #c4b8a4;
 
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  /* ── Text ── */
+  --color-text: #1a1410;          /* warm near-black */
+  --color-text-secondary: #57534e;
+  --color-text-muted: #a8a29e;
 
+  /* ── Semantic status (bg / ring / fg) ── */
   --color-success: #059669;
-  --color-warning: #d97706;
+  --color-success-bg: #ecfdf5;
+  --color-success-ring: #6ee7b7;
+
   --color-info: #2563eb;
+  --color-info-bg: #eff6ff;
+  --color-info-ring: #93c5fd;
+
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-ring: #fcd34d;
+
+  --color-danger: #e11d48;
+  --color-danger-bg: #fff1f2;
+  --color-danger-ring: #fda4af;
+
+  --color-neutral: #57534e;
+  --color-neutral-bg: #f5f0e8;
+  --color-neutral-ring: #d6cdbf;
+
+  /* ── Gradients ── */
+  --gradient-sunrise: linear-gradient(135deg, #fbbf24 0%, #fb7185 50%, #8b5cf6 100%);
+  --gradient-sunrise-soft: linear-gradient(135deg, #fef3c7 0%, #ffe4e6 50%, #ede9fe 100%);
+  --gradient-trust: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+  --gradient-thrive: linear-gradient(135deg, #10b981 0%, #14b8a6 50%, #2563eb 100%);
 
   /* ── Radii ── */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius-lg: 0.875rem;   /* bumped */
+  --radius-xl: 1.25rem;    /* bumped */
+  --radius-2xl: 1.5rem;
 
-  /* ── Shadows ── */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  /* ── Shadows (warm-tinted) ── */
+  --shadow-sm: 0 1px 2px 0 rgb(28 20 12 / 0.04);
+  --shadow-md: 0 4px 12px -2px rgb(28 20 12 / 0.06), 0 2px 4px -2px rgb(28 20 12 / 0.04);
+  --shadow-lg: 0 12px 28px -8px rgb(28 20 12 / 0.10), 0 4px 10px -4px rgb(28 20 12 / 0.05);
+  --shadow-glow-primary: 0 8px 24px -6px rgba(37, 99, 235, 0.32);
+  --shadow-glow-warm: 0 8px 24px -6px rgba(251, 113, 133, 0.28);
 
   /* ── Timing ── */
   --duration-fast: 150ms;
-  --duration-base: 200ms;
-  --duration-slow: 300ms;
+  --duration-base: 220ms;
+  --duration-slow: 320ms;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* ─── Base ─────────────────────────────────────────────────── */
 
 body {
   background: var(--color-bg);
+  background-image:
+    radial-gradient(1200px 600px at 0% -10%, rgba(251, 191, 36, 0.10), transparent 60%),
+    radial-gradient(1000px 500px at 100% -5%, rgba(139, 92, 246, 0.08), transparent 60%);
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Numeric / metric elements */
+.font-mono,
+[data-numeric="true"] {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum", "ss01";
+  letter-spacing: -0.01em;
+}
+
+/* ─── Glass surface utility ─────────────────────────────────── */
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-tinted {
+  background: rgba(255, 248, 240, 0.78);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid rgba(236, 230, 220, 0.7);
+}
+
+/* ─── Sunrise accent strip ──────────────────────────────────── */
+
+.accent-bar {
+  height: 3px;
+  background: var(--gradient-sunrise);
+  border-radius: 999px;
 }
 
 /* ─── Focus ring utility ────────────────────────────────────── */
@@ -83,7 +161,7 @@ body {
   background: var(--color-border-hover);
 }
 
-/* ─── Blue glow animation ───────────────────────────────────── */
+/* ─── Glow animations (preserved) ───────────────────────────── */
 
 @keyframes glow-blue {
   0%, 100% { box-shadow: 0 0 4px 1px rgba(59, 130, 246, 0.5); }
@@ -119,6 +197,17 @@ body {
 
 .animate-glow-emerald {
   animation: glow-emerald 1.5s ease-in-out infinite;
+}
+
+/* ─── Soft entrance ─────────────────────────────────────────── */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-rise-in {
+  animation: rise-in 320ms var(--ease-out-soft) both;
 }
 
 /* ─── Reduced motion ────────────────────────────────────────── */
