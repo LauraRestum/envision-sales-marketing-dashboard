@@ -57,12 +57,9 @@ export const projects: Project[] = [
     projectName: "Streamlight",
     description: "Presentation materials and working assets for the Streamlight project.",
     owner: "Sales Team",
-    status: "In Progress",
+    status: "Presented",
     lastUpdated: "2026-04-10",
-    assignee: "Kathy",
     archived: true,
-    statusNote: "Awaiting additional review — awaiting names for the ending slide",
-    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
@@ -102,12 +99,9 @@ export const projects: Project[] = [
     projectName: "APS",
     description: "Presentation materials and working assets for the APS project.",
     owner: "Sales Team",
-    status: "Published",
+    status: "Presented",
     lastUpdated: "2026-04-08",
-    assignee: "Rob",
     archived: true,
-    statusNote: "Awaiting additional feedback",
-    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
@@ -147,13 +141,9 @@ export const projects: Project[] = [
     projectName: "Lange — Presentation",
     description: "Presentation materials and working assets for the Lange presentation.",
     owner: "Sales Team",
-    status: "Published",
+    status: "Presented",
     lastUpdated: "2026-04-22",
-    assignee: "Sebastian",
     archived: true,
-    statusNote: "In production",
-    statusNoteVariant: "blue",
-    updateNote: "Updated as of 6:32am Wednesday",
     assets: {
       sop: {
         label: "SOP",
@@ -193,13 +183,9 @@ export const projects: Project[] = [
     projectName: "Lange — One-on-One Meeting",
     description: "Materials and working assets for the Lange one-on-one meeting.",
     owner: "Sales Team",
-    status: "Published",
+    status: "Presented",
     lastUpdated: "2026-04-22",
-    assignee: "Sebastian",
     archived: true,
-    statusNote: "In production",
-    statusNoteVariant: "blue",
-    updateNote: "Updated as of 6:32am Wednesday",
     assets: {
       sop: {
         label: "SOP",
@@ -239,9 +225,8 @@ export const projects: Project[] = [
     projectName: "Under Armour",
     description: "Presentation materials and working assets for the Under Armour project.",
     owner: "Sales Team",
-    status: "Ready",
+    status: "Presented",
     lastUpdated: "2026-04-09",
-    assignee: "Sebastian",
     archived: true,
     assets: {
       sop: {
@@ -382,12 +367,9 @@ export const projects: Project[] = [
     projectName: "Steris",
     description: "Presentation materials and working assets for the Steris project.",
     owner: "Sales Team",
-    status: "Ready",
+    status: "Presented",
     lastUpdated: "2026-05-01",
-    assignee: "Dedra",
     archived: true,
-    statusNote: "Ready for review",
-    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
