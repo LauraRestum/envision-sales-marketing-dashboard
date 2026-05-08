@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { ProjectStatus } from "@/types";
 
 const statuses: Array<ProjectStatus | "All"> = [
@@ -11,22 +12,31 @@ const statuses: Array<ProjectStatus | "All"> = [
   "Presented",
 ];
 
-const activeStyles: Record<ProjectStatus | "All", string> = {
-  All: "text-white shadow-[var(--shadow-glow-warm)]",
-  Draft: "bg-stone-700 text-white shadow-[var(--shadow-sm)]",
-  "In Progress": "bg-amber-500 text-white shadow-[var(--shadow-sm)]",
-  Ready: "bg-emerald-600 text-white shadow-[var(--shadow-sm)]",
-  Published: "bg-blue-600 text-white shadow-[var(--shadow-sm)]",
-  Presented: "bg-rose-600 text-white shadow-[var(--shadow-sm)]",
+const activeBg: Record<ProjectStatus | "All", string> = {
+  All: "var(--gradient-primary-deep)",
+  Draft: "var(--brand-charcoal)",
+  "In Progress": "var(--brand-goldenrod)",
+  Ready: "var(--brand-green)",
+  Published: "var(--brand-bright-blue)",
+  Presented: "var(--brand-terracotta)",
 };
 
-const dotColors: Record<ProjectStatus | "All", string> = {
-  All: "bg-white/80",
-  Draft: "bg-stone-400",
-  "In Progress": "bg-amber-500",
-  Ready: "bg-emerald-500",
-  Published: "bg-blue-500",
-  Presented: "bg-rose-500",
+const activeText: Record<ProjectStatus | "All", string> = {
+  All: "#ffffff",
+  Draft: "#ffffff",
+  "In Progress": "#3a2400",
+  Ready: "#0c2c0a",
+  Published: "var(--brand-navy)",
+  Presented: "#3a1604",
+};
+
+const dotBg: Record<ProjectStatus | "All", string> = {
+  All: "rgba(255,255,255,0.85)",
+  Draft: "var(--brand-charcoal)",
+  "In Progress": "var(--brand-goldenrod)",
+  Ready: "var(--brand-green)",
+  Published: "var(--brand-bright-blue)",
+  Presented: "var(--brand-terracotta)",
 };
 
 interface StatusFilterProps {
@@ -39,25 +49,27 @@ export function StatusFilter({ active, onChange }: StatusFilterProps) {
     <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by status">
       {statuses.map((s) => {
         const isActive = s === active;
-        const allActiveStyle =
-          s === "All" && isActive
-            ? { background: "var(--gradient-sunrise)" }
-            : undefined;
+        const activeStyle: CSSProperties | undefined = isActive
+          ? { background: activeBg[s], color: activeText[s] }
+          : undefined;
         return (
           <button
             key={s}
             role="tab"
             aria-selected={isActive}
+            aria-label={`Filter by ${s}`}
             onClick={() => onChange(s)}
-            style={allActiveStyle}
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-[var(--duration-base)] cursor-pointer ${
+            data-on-color={isActive ? "true" : undefined}
+            style={activeStyle}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.15em] transition-all duration-[var(--duration-base)] cursor-pointer ${
               isActive
-                ? activeStyles[s]
+                ? "shadow-[var(--shadow-md)]"
                 : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text)] hover:-translate-y-px"
             }`}
           >
             <span
-              className={`inline-block h-1.5 w-1.5 rounded-full ${dotColors[s]}`}
+              className="inline-block h-1.5 w-1.5 rounded-full"
+              style={{ background: dotBg[s] }}
               aria-hidden="true"
             />
             {s}

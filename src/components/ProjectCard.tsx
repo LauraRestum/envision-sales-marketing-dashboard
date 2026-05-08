@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Asset, Project, AssetKey } from "@/types";
 import { appConfig } from "@/data/config";
 import { StatusBadge } from "./StatusBadge";
+import { PillarChip } from "./PillarChip";
 import { AssetRow } from "./AssetRow";
 import { DocumentViewer } from "./DocumentViewer";
 
@@ -199,13 +200,13 @@ export function ProjectCard({ project }: { project: Project }) {
           : "border-[var(--color-border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 hover:border-[var(--color-border-hover)]"
       }`}
     >
-      {/* Gradient left edge on open */}
+      {/* Gradient left edge on open (brand: navy to bright blue) */}
       <span
         aria-hidden="true"
         className={`pointer-events-none absolute inset-y-0 left-0 w-1 transition-opacity duration-[var(--duration-base)] ${
           open ? "opacity-100" : "opacity-0"
         }`}
-        style={{ background: "var(--gradient-sunrise)" }}
+        style={{ background: "var(--gradient-primary)" }}
       />
       {/* ── Header (clickable toggle) ─────────────────────── */}
       <button
@@ -226,11 +227,20 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.projectName}
             </h2>
             <StatusBadge status={project.status} />
+            {project.pillar && <PillarChip pillar={project.pillar} />}
             {project.assignee && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-semibold text-violet-700 border border-violet-200">
+              <span
+                className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                style={{
+                  background: "rgba(140, 71, 153, 0.10)",
+                  color: "var(--brand-violet)",
+                  boxShadow: "inset 0 0 0 1px rgba(140, 71, 153, 0.32)",
+                }}
+              >
                 <svg className="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                 </svg>
+                <span className="sr-only">Assigned to </span>
                 {project.assignee}
               </span>
             )}
@@ -249,37 +259,65 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.statusNote && (
                 (Array.isArray(project.statusNote) ? project.statusNote : [project.statusNote]).map((note, i) => (
                   project.statusNoteVariant === "blue" ? (
-                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
-                      <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
+                    <div
+                      key={i}
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold animate-glow-blue animate-blink-blue"
+                      style={{ background: "#e6ecf6", color: "var(--brand-blue)", boxShadow: "inset 0 0 0 1px rgba(0,48,135,0.35)" }}
+                    >
+                      <span className="inline-block h-2 w-2 rounded-full animate-glow-blue" style={{ background: "var(--brand-blue)" }} aria-hidden="true" />
+                      <span className="sr-only">Update: </span>
                       {note}
                     </div>
                   ) : project.statusNoteVariant === "purple" ? (
-                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 border border-violet-200 px-2.5 py-0.5 text-xs font-medium text-violet-700">
-                      <span className="inline-block h-2 w-2 rounded-full bg-violet-500 animate-glow-purple" />
+                    <div
+                      key={i}
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                      style={{ background: "rgba(140,71,153,0.10)", color: "var(--brand-violet)", boxShadow: "inset 0 0 0 1px rgba(140,71,153,0.32)" }}
+                    >
+                      <span className="inline-block h-2 w-2 rounded-full animate-glow-purple" style={{ background: "var(--brand-violet)" }} aria-hidden="true" />
+                      <span className="sr-only">Note: </span>
                       {note}
                     </div>
                   ) : project.statusNoteVariant === "green" ? (
-                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-300 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 animate-glow-emerald">
-                      <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-glow-emerald" />
+                    <div
+                      key={i}
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold animate-glow-emerald"
+                      style={{ background: "var(--color-success-bg)", color: "var(--brand-forest)", boxShadow: "inset 0 0 0 1px var(--color-success-ring)" }}
+                    >
+                      <span className="inline-block h-2 w-2 rounded-full animate-glow-emerald" style={{ background: "var(--brand-green)" }} aria-hidden="true" />
+                      <span className="sr-only">Note: </span>
                       {note}
                     </div>
                   ) : (
-                    <div key={i} className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                      <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                    <div
+                      key={i}
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                      style={{ background: "var(--color-warning-bg)", color: "#7a4a00", boxShadow: "inset 0 0 0 1px var(--color-warning-ring)" }}
+                    >
+                      <span className="inline-block h-2 w-2 rounded-full animate-pulse" style={{ background: "var(--brand-goldenrod)" }} aria-hidden="true" />
+                      <span className="sr-only">Note: </span>
                       {note}
                     </div>
                   )
                 ))
               )}
               {project.updateNote && (
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
-                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-glow-emerald" />
+                <div
+                  className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                  style={{ background: "var(--color-success-bg)", color: "var(--brand-forest)", boxShadow: "inset 0 0 0 1px var(--color-success-ring)" }}
+                >
+                  <span className="inline-block h-2 w-2 rounded-full animate-glow-emerald" style={{ background: "var(--brand-green)" }} aria-hidden="true" />
+                  <span className="sr-only">Update: </span>
                   {project.updateNote}
                 </div>
               )}
               {project.extraNote && (
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-300 px-2.5 py-0.5 text-xs font-semibold text-blue-700 animate-glow-blue animate-blink-blue">
-                  <span className="inline-block h-2 w-2 rounded-full bg-blue-500 animate-glow-blue" />
+                <div
+                  className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold animate-glow-blue animate-blink-blue"
+                  style={{ background: "#e6ecf6", color: "var(--brand-blue)", boxShadow: "inset 0 0 0 1px rgba(0,48,135,0.35)" }}
+                >
+                  <span className="inline-block h-2 w-2 rounded-full animate-glow-blue" style={{ background: "var(--brand-blue)" }} aria-hidden="true" />
+                  <span className="sr-only">Update: </span>
                   {project.extraNote}
                 </div>
               )}
@@ -310,17 +348,18 @@ export function ProjectCard({ project }: { project: Project }) {
       >
         <div className="overflow-hidden">
           <div className="flex flex-col gap-3 border-t border-[var(--color-border)] px-5 pt-5 pb-5">
-            {/* Live link — primary big button */}
+            {/* Live link: primary big button */}
             {hasLive ? (
               <a
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ background: "var(--gradient-trust)" }}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] px-5 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-glow-primary)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-lg)] cursor-pointer"
+                data-on-color="true"
+                style={{ background: "var(--gradient-primary-deep)" }}
+                className="btn-brand inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] px-5 py-3.5 text-sm text-white shadow-[var(--shadow-glow-primary)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-lg)] cursor-pointer"
               >
                 <ExternalLinkIcon />
-                Open Live Link
+                Open live link
               </a>
             ) : (
               <div className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-bg)] px-5 py-3.5 text-sm font-medium text-[var(--color-text-muted)]">
@@ -328,24 +367,30 @@ export function ProjectCard({ project }: { project: Project }) {
               </div>
             )}
 
-            {/* Give Feedback — small button below live link */}
+            {/* Give Feedback: small button below live link */}
             <a
               href={buildFeedbackMailto(project.projectName, liveUrl)}
-              className="inline-flex items-center justify-center gap-1.5 self-center rounded-[var(--radius-md)] border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-amber-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 self-center rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.15em] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+              style={{
+                background: "var(--color-warning-bg)",
+                color: "#7a4a00",
+                boxShadow: "inset 0 0 0 1px var(--color-warning-ring), var(--shadow-sm)",
+              }}
             >
               <MailIcon />
-              Give Feedback
+              Give feedback
             </a>
 
-            {/* Additional Assets — primary big button */}
+            {/* Additional Assets: primary big button */}
             <button
               type="button"
               onClick={() => setShowAdditional((prev) => !prev)}
               aria-expanded={showAdditional}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-primary)] bg-[var(--color-primary-light)] px-5 py-3.5 text-sm font-semibold text-[var(--color-primary)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:bg-blue-100 hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+              className="btn-brand inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border bg-[var(--color-primary-light)] px-5 py-3.5 text-sm shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-base)] hover:-translate-y-px hover:shadow-[var(--shadow-md)] cursor-pointer"
+              style={{ borderColor: "var(--color-primary)", color: "var(--color-primary)" }}
             >
               <FolderIcon />
-              Additional Assets
+              Additional assets
               <ChevronIcon open={showAdditional} />
             </button>
 
@@ -395,7 +440,7 @@ export function ProjectCard({ project }: { project: Project }) {
       {previewAsset && (previewAsset.downloadUrl || previewAsset.url) && (
         <DocumentViewer
           url={(previewAsset.downloadUrl || previewAsset.url) as string}
-          title={`${project.projectName} — ${previewAsset.label}`}
+          title={`${project.projectName}: ${previewAsset.label}`}
           onClose={() => setPreviewAsset(null)}
         />
       )}

@@ -13,10 +13,10 @@ export function Header() {
             <div className="flex items-center gap-2.5">
               <span
                 className="inline-block h-2.5 w-2.5 rounded-full"
-                style={{ background: "var(--gradient-sunrise)" }}
+                style={{ background: "var(--gradient-primary)" }}
                 aria-hidden="true"
               />
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-[var(--color-text-secondary)]">
                 Envision &middot; Sales &amp; marketing
               </p>
             </div>
@@ -29,16 +29,26 @@ export function Header() {
           </div>
 
           <div className="hidden shrink-0 sm:flex">
-            <div className="flex items-center gap-2.5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2 shadow-[var(--shadow-sm)]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            <div
+              className="flex items-center gap-2.5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2 shadow-[var(--shadow-sm)]"
+              role="status"
+              aria-label={`${activeCount} live projects`}
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span
+                  className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+                  style={{ background: "var(--brand-green)" }}
+                />
+                <span
+                  className="relative inline-flex h-2 w-2 rounded-full"
+                  style={{ background: "var(--brand-green)" }}
+                />
               </span>
-              <span data-numeric="true" className="text-base font-semibold text-[var(--color-text)]">
+              <span data-numeric="true" className="text-base font-bold text-[var(--color-text)]">
                 {activeCount}
               </span>
-              <span className="text-xs font-medium text-[var(--color-text-secondary)]">
-                live projects
+              <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
+                Live projects
               </span>
             </div>
           </div>
