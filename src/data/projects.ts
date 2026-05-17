@@ -452,8 +452,10 @@ export const projects: Project[] = [
     description: "Wichita-tailored capabilities deck.",
     owner: "Sales Team",
     status: "Draft",
-    lastUpdated: "2026-05-08",
+    lastUpdated: "2026-05-17",
     assignee: ["Sebastian", "Dedra"],
+    statusNote: "Active edits — design & image updates in progress",
+    statusNoteVariant: "blue",
     assets: {
       sop: {
         label: "SOP",
@@ -483,7 +485,7 @@ export const projects: Project[] = [
       publishedApplication: {
         label: "Published Application",
         description: "Published live experience",
-        url: "",
+        url: "https://wichita-capabilities.vercel.app/",
         downloadUrl: "",
       },
     },
